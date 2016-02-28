@@ -8,45 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		232F5A2C1C82808C0013044E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232F5A2B1C82808C0013044E /* AppDelegate.swift */; };
-		232F5A2E1C82808C0013044E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232F5A2D1C82808C0013044E /* ViewController.swift */; };
+		232F5A2E1C82808C0013044E /* AuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232F5A2D1C82808C0013044E /* AuthVC.swift */; };
 		232F5A311C82808C0013044E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 232F5A2F1C82808C0013044E /* Main.storyboard */; };
 		232F5A331C82808C0013044E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 232F5A321C82808C0013044E /* Assets.xcassets */; };
 		232F5A361C82808C0013044E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 232F5A341C82808C0013044E /* LaunchScreen.storyboard */; };
-		232F5A411C82808C0013044E /* Attendance_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232F5A401C82808C0013044E /* Attendance_iOSTests.swift */; };
-		232F5A4C1C82808C0013044E /* Attendance_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232F5A4B1C82808C0013044E /* Attendance_iOSUITests.swift */; };
+		232F5A5C1C8281540013044E /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 232F5A5B1C8281540013044E /* libicucore.tbd */; };
+		232F5A5E1C82816C0013044E /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 232F5A5D1C82816C0013044E /* libc++.tbd */; };
+		232F5A601C8281750013044E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 232F5A5F1C8281750013044E /* CFNetwork.framework */; };
+		232F5A621C82817F0013044E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 232F5A611C82817F0013044E /* Security.framework */; };
+		232F5A651C83B5080013044E /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 232F5A641C83B5080013044E /* Firebase.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		232F5A3D1C82808C0013044E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 232F5A201C82808C0013044E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 232F5A271C82808C0013044E;
-			remoteInfo = Attendance_iOS;
-		};
-		232F5A481C82808C0013044E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 232F5A201C82808C0013044E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 232F5A271C82808C0013044E;
-			remoteInfo = Attendance_iOS;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		232F5A281C82808C0013044E /* Attendance_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Attendance_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		232F5A2B1C82808C0013044E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		232F5A2D1C82808C0013044E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		232F5A2D1C82808C0013044E /* AuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVC.swift; sourceTree = "<group>"; };
 		232F5A301C82808C0013044E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		232F5A321C82808C0013044E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		232F5A351C82808C0013044E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		232F5A371C82808C0013044E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		232F5A3C1C82808C0013044E /* Attendance_iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Attendance_iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		232F5A401C82808C0013044E /* Attendance_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attendance_iOSTests.swift; sourceTree = "<group>"; };
-		232F5A421C82808C0013044E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		232F5A471C82808C0013044E /* Attendance_iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Attendance_iOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		232F5A4B1C82808C0013044E /* Attendance_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attendance_iOSUITests.swift; sourceTree = "<group>"; };
-		232F5A4D1C82808C0013044E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		232F5A5B1C8281540013044E /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		232F5A5D1C82816C0013044E /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		232F5A5F1C8281750013044E /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		232F5A611C82817F0013044E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		232F5A631C8281890013044E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		232F5A641C83B5080013044E /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,20 +40,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		232F5A391C82808C0013044E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		232F5A441C82808C0013044E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				232F5A651C83B5080013044E /* Firebase.framework in Frameworks */,
+				232F5A621C82817F0013044E /* Security.framework in Frameworks */,
+				232F5A601C8281750013044E /* CFNetwork.framework in Frameworks */,
+				232F5A5E1C82816C0013044E /* libc++.tbd in Frameworks */,
+				232F5A5C1C8281540013044E /* libicucore.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,9 +54,13 @@
 		232F5A1F1C82808C0013044E = {
 			isa = PBXGroup;
 			children = (
+				232F5A611C82817F0013044E /* Security.framework */,
+				232F5A5F1C8281750013044E /* CFNetwork.framework */,
+				232F5A5D1C82816C0013044E /* libc++.tbd */,
+				232F5A5B1C8281540013044E /* libicucore.tbd */,
+				232F5A641C83B5080013044E /* Firebase.framework */,
+				232F5A631C8281890013044E /* SystemConfiguration.framework */,
 				232F5A2A1C82808C0013044E /* Attendance_iOS */,
-				232F5A3F1C82808C0013044E /* Attendance_iOSTests */,
-				232F5A4A1C82808C0013044E /* Attendance_iOSUITests */,
 				232F5A291C82808C0013044E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,8 +69,6 @@
 			isa = PBXGroup;
 			children = (
 				232F5A281C82808C0013044E /* Attendance_iOS.app */,
-				232F5A3C1C82808C0013044E /* Attendance_iOSTests.xctest */,
-				232F5A471C82808C0013044E /* Attendance_iOSUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -98,31 +77,13 @@
 			isa = PBXGroup;
 			children = (
 				232F5A2B1C82808C0013044E /* AppDelegate.swift */,
-				232F5A2D1C82808C0013044E /* ViewController.swift */,
+				232F5A2D1C82808C0013044E /* AuthVC.swift */,
 				232F5A2F1C82808C0013044E /* Main.storyboard */,
 				232F5A321C82808C0013044E /* Assets.xcassets */,
 				232F5A341C82808C0013044E /* LaunchScreen.storyboard */,
 				232F5A371C82808C0013044E /* Info.plist */,
 			);
 			path = Attendance_iOS;
-			sourceTree = "<group>";
-		};
-		232F5A3F1C82808C0013044E /* Attendance_iOSTests */ = {
-			isa = PBXGroup;
-			children = (
-				232F5A401C82808C0013044E /* Attendance_iOSTests.swift */,
-				232F5A421C82808C0013044E /* Info.plist */,
-			);
-			path = Attendance_iOSTests;
-			sourceTree = "<group>";
-		};
-		232F5A4A1C82808C0013044E /* Attendance_iOSUITests */ = {
-			isa = PBXGroup;
-			children = (
-				232F5A4B1C82808C0013044E /* Attendance_iOSUITests.swift */,
-				232F5A4D1C82808C0013044E /* Info.plist */,
-			);
-			path = Attendance_iOSUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,42 +106,6 @@
 			productReference = 232F5A281C82808C0013044E /* Attendance_iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		232F5A3B1C82808C0013044E /* Attendance_iOSTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 232F5A531C82808C0013044E /* Build configuration list for PBXNativeTarget "Attendance_iOSTests" */;
-			buildPhases = (
-				232F5A381C82808C0013044E /* Sources */,
-				232F5A391C82808C0013044E /* Frameworks */,
-				232F5A3A1C82808C0013044E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				232F5A3E1C82808C0013044E /* PBXTargetDependency */,
-			);
-			name = Attendance_iOSTests;
-			productName = Attendance_iOSTests;
-			productReference = 232F5A3C1C82808C0013044E /* Attendance_iOSTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		232F5A461C82808C0013044E /* Attendance_iOSUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 232F5A561C82808C0013044E /* Build configuration list for PBXNativeTarget "Attendance_iOSUITests" */;
-			buildPhases = (
-				232F5A431C82808C0013044E /* Sources */,
-				232F5A441C82808C0013044E /* Frameworks */,
-				232F5A451C82808C0013044E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				232F5A491C82808C0013044E /* PBXTargetDependency */,
-			);
-			name = Attendance_iOSUITests;
-			productName = Attendance_iOSUITests;
-			productReference = 232F5A471C82808C0013044E /* Attendance_iOSUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -194,16 +119,6 @@
 					232F5A271C82808C0013044E = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = N3C863Y633;
-					};
-					232F5A3B1C82808C0013044E = {
-						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = N3C863Y633;
-						TestTargetID = 232F5A271C82808C0013044E;
-					};
-					232F5A461C82808C0013044E = {
-						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = N3C863Y633;
-						TestTargetID = 232F5A271C82808C0013044E;
 					};
 				};
 			};
@@ -221,8 +136,6 @@
 			projectRoot = "";
 			targets = (
 				232F5A271C82808C0013044E /* Attendance_iOS */,
-				232F5A3B1C82808C0013044E /* Attendance_iOSTests */,
-				232F5A461C82808C0013044E /* Attendance_iOSUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -238,20 +151,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		232F5A3A1C82808C0013044E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		232F5A451C82808C0013044E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -259,41 +158,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				232F5A2E1C82808C0013044E /* ViewController.swift in Sources */,
+				232F5A2E1C82808C0013044E /* AuthVC.swift in Sources */,
 				232F5A2C1C82808C0013044E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		232F5A381C82808C0013044E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				232F5A411C82808C0013044E /* Attendance_iOSTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		232F5A431C82808C0013044E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				232F5A4C1C82808C0013044E /* Attendance_iOSUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		232F5A3E1C82808C0013044E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 232F5A271C82808C0013044E /* Attendance_iOS */;
-			targetProxy = 232F5A3D1C82808C0013044E /* PBXContainerItemProxy */;
-		};
-		232F5A491C82808C0013044E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 232F5A271C82808C0013044E /* Attendance_iOS */;
-			targetProxy = 232F5A481C82808C0013044E /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		232F5A2F1C82808C0013044E /* Main.storyboard */ = {
@@ -402,6 +272,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Attendance_iOS",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Attendance_iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.JakeWert.Attendance-iOS";
@@ -413,58 +288,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Attendance_iOS",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Attendance_iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.JakeWert.Attendance-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		232F5A541C82808C0013044E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = Attendance_iOSTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.JakeWert.Attendance-iOSTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Attendance_iOS.app/Attendance_iOS";
-			};
-			name = Debug;
-		};
-		232F5A551C82808C0013044E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = Attendance_iOSTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.JakeWert.Attendance-iOSTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Attendance_iOS.app/Attendance_iOS";
-			};
-			name = Release;
-		};
-		232F5A571C82808C0013044E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = Attendance_iOSUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.JakeWert.Attendance-iOSUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = Attendance_iOS;
-				USES_XCTRUNNER = YES;
-			};
-			name = Debug;
-		};
-		232F5A581C82808C0013044E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = Attendance_iOSUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.JakeWert.Attendance-iOSUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = Attendance_iOS;
-				USES_XCTRUNNER = YES;
 			};
 			name = Release;
 		};
@@ -487,22 +319,7 @@
 				232F5A521C82808C0013044E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		232F5A531C82808C0013044E /* Build configuration list for PBXNativeTarget "Attendance_iOSTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				232F5A541C82808C0013044E /* Debug */,
-				232F5A551C82808C0013044E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
-		232F5A561C82808C0013044E /* Build configuration list for PBXNativeTarget "Attendance_iOSUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				232F5A571C82808C0013044E /* Debug */,
-				232F5A581C82808C0013044E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
