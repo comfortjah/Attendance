@@ -1,0 +1,72 @@
+<!doctype html>
+<html ng-app="indexApp">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+  <script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
+  <!-- <script src="js/index.js"></script> !-->
+</head>
+
+<body ng-controller="MyController">
+
+  <!--list of classes!-->
+  <div>
+    <h3>Classes</h3>
+    <table border="1px">
+      <tr>
+        <td>Class Name</td>
+        <td>Instructor</td>
+      </tr>
+      <tr ng-repeat="obj in classes">
+        <td><a href="javascript:void(0)" ng-click="selectClass(obj)"> {{ obj.className }} </a></td>
+        <td>{{ obj.instructor }}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div ng-show="theClassName != null">
+    <h3>{{ theClassName }} Attendance</h3>
+    Date: <select ng-model="selection" ng-options="k for (k,v) in theClassAttendance" ng-change="displayAttendance(selection)">
+    </select>
+    </br>
+    </br>
+
+    <table border="1px" ng-show="selectedDate != null">
+      <tr>
+        <td>Student ID No.</td>
+        <td>Arrival Time</td>
+      </tr>
+      <tr ng-repeat="(key, value) in selectedDate">
+        <td>{{ key }}</td>
+        <td>{{ value }}</td>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+  var indexApp = angular.module("indexApp", ["firebase"]);
+
+  indexApp.controller("MyController", ["$scope", "$firebaseArray",
+  function($scope, $firebaseArray)
+  {
+    var refClasses = new Firebase("https://attendance-cuwcs.firebaseio.com/Classes");
+    //refClasses.push({"Attendance":{"2-22-16":{"01957945":"15:05","09182341":"16:01"},"2-24-16":{"09182341":"15:02","01957945":"15:02"}},"CRN":"65421","Roster":{"0":"01957945","1":"09182341"},"building":"Stuenkel","className":"CSC 450","instructor":"Dr. Litman","meetsDays":"MWF","roomNumber":120,"timeEnd":"15:10","timeStart":"16:00"})
+    $scope.classes = $firebaseArray(refClasses);
+
+    $scope.selectClass = function(obj)
+    {
+      $scope.theClassName = obj.className;
+      $scope.theClassAttendance = obj.Attendance;
+      $scope.selectedDate = null;
+    }
+
+    $scope.displayAttendance = function(dateSelection)
+    {
+      $scope.selectedDate = dateSelection;
+    }
+
+  }
+]);
+</script>
+</body>
+</html>
