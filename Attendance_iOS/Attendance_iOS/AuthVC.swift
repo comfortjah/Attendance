@@ -36,11 +36,14 @@ class AuthVC: UIViewController
                 if error != nil
                 {
                     // There was an error logging in to this account
+                    
+                    self.alert("Username and password do not match.")
+                    
+                    
                 }
                 else
                 {
-                    // We are now logged in
-                    print("We logged in")
+                    self.performSegueWithIdentifier("toDashboard", sender: nil)
                 }
         })
     }
@@ -62,6 +65,15 @@ class AuthVC: UIViewController
                     print("Successfully created user account with uid: \(uid)")
                 }
         })
+    }
+    
+    func alert(message:String)
+    {
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
 }
 

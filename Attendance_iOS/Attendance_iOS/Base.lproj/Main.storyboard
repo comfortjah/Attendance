@@ -104,16 +104,17 @@
                     <connections>
                         <outlet property="passwordTextField" destination="4Nk-Mx-No6" id="POx-OB-Tkd"/>
                         <outlet property="usernameTextField" destination="tua-O1-rM8" id="pRu-Dd-Etz"/>
+                        <segue destination="lvK-4q-EbV" kind="show" identifier="toDashboard" id="g3n-cz-1J5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="380" y="309"/>
         </scene>
-        <!--View Controller-->
+        <!--DashboardVC-->
         <scene sceneID="UfH-Bi-e85">
             <objects>
-                <viewController id="lvK-4q-EbV" sceneMemberID="viewController">
+                <viewController id="lvK-4q-EbV" customClass="DashboardVC" customModule="Attendance_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="R4v-x7-bFW"/>
                         <viewControllerLayoutGuide type="bottom" id="AYy-mK-8xA"/>
@@ -121,8 +122,87 @@
                     <view key="view" contentMode="scaleToFill" id="1yq-j2-naU">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Wh-C4-CYd">
+                                <rect key="frame" x="166" y="72" width="90" height="30"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="fLf-6k-9Ij"/>
+                                    <constraint firstAttribute="height" constant="30" id="prP-Lf-cIx"/>
+                                </constraints>
+                                <state key="normal" title="Class">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="classAction" destination="lvK-4q-EbV" eventType="touchUpInside" id="qTL-jf-s5n"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9PR-wm-hc0">
+                                <rect key="frame" x="255" y="72" width="90" height="30"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="2FJ-bX-uwh"/>
+                                    <constraint firstAttribute="height" constant="30" id="ges-9Y-bfI"/>
+                                </constraints>
+                                <state key="normal" title="Date">
+                                    <color key="titleColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="dateAction" destination="lvK-4q-EbV" eventType="touchUpInside" id="hZO-Nc-VbO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDR-dH-oyd">
+                                <rect key="frame" x="344" y="72" width="90" height="30"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="dVn-sc-4Sy"/>
+                                    <constraint firstAttribute="width" constant="90" id="qnF-XC-aoU"/>
+                                </constraints>
+                                <state key="normal" title="Time">
+                                    <color key="titleColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="timeAction" destination="lvK-4q-EbV" eventType="touchUpInside" id="tKb-br-dMY"/>
+                                </connections>
+                            </button>
+                            <searchBar contentMode="redraw" text="" translatesAutoresizingMaskIntoConstraints="NO" id="HPL-7t-JOp">
+                                <rect key="frame" x="20" y="28" width="560" height="44"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="barTintColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                            </searchBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="733-9v-HbJ">
+                                <rect key="frame" x="0.0" y="110" width="600" height="490"/>
+                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="HPL-7t-JOp" firstAttribute="leading" secondItem="1yq-j2-naU" secondAttribute="leadingMargin" id="34r-vI-kha"/>
+                            <constraint firstItem="HPL-7t-JOp" firstAttribute="trailing" secondItem="1yq-j2-naU" secondAttribute="trailingMargin" id="84f-Rl-4PS"/>
+                            <constraint firstItem="AYy-mK-8xA" firstAttribute="top" secondItem="733-9v-HbJ" secondAttribute="bottom" id="89V-gS-NBq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="733-9v-HbJ" secondAttribute="trailing" constant="-20" id="GTC-m5-QZJ"/>
+                            <constraint firstItem="9PR-wm-hc0" firstAttribute="top" secondItem="HPL-7t-JOp" secondAttribute="bottom" id="Gyl-3F-dKd"/>
+                            <constraint firstItem="xDR-dH-oyd" firstAttribute="leading" secondItem="9PR-wm-hc0" secondAttribute="trailing" constant="-1" id="Tlz-tg-5mL"/>
+                            <constraint firstItem="HPL-7t-JOp" firstAttribute="top" secondItem="R4v-x7-bFW" secondAttribute="bottom" constant="8" id="Zri-6M-czK"/>
+                            <constraint firstItem="733-9v-HbJ" firstAttribute="leading" secondItem="1yq-j2-naU" secondAttribute="leadingMargin" constant="-20" id="kwP-BB-Pih"/>
+                            <constraint firstItem="9PR-wm-hc0" firstAttribute="centerX" secondItem="1yq-j2-naU" secondAttribute="centerX" id="rmO-Ua-66o"/>
+                            <constraint firstItem="xDR-dH-oyd" firstAttribute="top" secondItem="HPL-7t-JOp" secondAttribute="bottom" id="vFv-Eu-bxv"/>
+                            <constraint firstItem="3Wh-C4-CYd" firstAttribute="top" secondItem="HPL-7t-JOp" secondAttribute="bottom" id="ve6-CS-ged"/>
+                            <constraint firstItem="733-9v-HbJ" firstAttribute="top" secondItem="9PR-wm-hc0" secondAttribute="bottom" constant="8" id="vms-XC-oTA"/>
+                            <constraint firstItem="9PR-wm-hc0" firstAttribute="leading" secondItem="3Wh-C4-CYd" secondAttribute="trailing" constant="-1" id="xzz-jU-vFs"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="classButton" destination="3Wh-C4-CYd" id="8lZ-7h-lmA"/>
+                        <outlet property="dateButton" destination="9PR-wm-hc0" id="4Pi-hc-Nc5"/>
+                        <outlet property="searchBar" destination="HPL-7t-JOp" id="rgt-qm-1LA"/>
+                        <outlet property="timeButton" destination="xDR-dH-oyd" id="Sis-kg-Pre"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mdg-Bi-anm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
