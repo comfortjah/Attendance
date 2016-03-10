@@ -1,7 +1,7 @@
 var indexApp = angular.module("indexApp", ["firebase"]);
 
-indexApp.controller("MyController", ["$scope", "$firebase",
-function($scope $firebase)
+indexApp.controller("MyController", ["$scope", "$firebaseAuth",
+function($scope, $firebaseAuth)
 {
   var ref = new Firebase("https://attendance-cuwcs.firebaseio.com/");
   var auth = $firebaseAuth(ref);
