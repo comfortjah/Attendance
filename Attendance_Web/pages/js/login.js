@@ -22,7 +22,7 @@ function($scope, $firebaseAuth)
         else
         {
           console.log("Authenticated successfully with payload:", authData);
-          //window.location.href = 'home.html'
+          window.location.href = 'dashboard.html'
         }
       });
   }
