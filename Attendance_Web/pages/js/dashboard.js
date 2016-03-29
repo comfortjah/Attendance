@@ -6,39 +6,60 @@ function($scope, $firebaseArray)
   var ref = new Firebase("https://attendance-cuwcs.firebaseio.com/");
   var refClasses = ref.child("Classes");
 
+  var someRef = new Firebase("https://attendance-cuwcs.firebaseio.com/Classes/");
+  someRef.push({"Attendance":{"2-15-16":{"01957945":"17:53","09182341":"17:53"},"2-22-16":{"09182341":"18:02","01957945":"17:57"}},"CRN":"65420","building":"Loeber","className":"CSC 518","instructor":"Litman","meetsDays":"M","roomNumber":118,"timeEnd":"22:00","timeStart":"18:00"});
+
   var authData = ref.getAuth();
 
   if (authData)
   {
     $scope.firstName = "Mike";
     $scope.theClasses = $firebaseArray(refClasses);
-    console.log($scope.theClasses);
+    $scope.theRoster;
 
-    var refStudents = ref.child("Students");
-    var theStudents;
-    refStudents.on("value", function(data)
-    {
-      theStudents = data.val();
-    });
+    var refAllStudents = ref.child("Students");
 
+    $scope.allStudents = $firebaseArray(refAllStudents);
+
+    var refRoster;
     $scope.selectClass = function(obj)
     {
-      var theStudentIDs = obj.Roster;
-      $scope.theRoster = [];
-      $scope.theClassName = obj.className;
+      refRoster = refClasses.child(obj.$id).child('Roster');
+      $scope.theRoster = $firebaseArray(refRoster);
+    };
 
-      angular.forEach(theStudents, function(value, key)
+    $scope.addingStudent = false;
+
+
+    $scope.addStudent = function(theStudent)
+    {
+      if(theStudent != null)
       {
-        if (theStudentIDs.indexOf(key) != -1)
-        {
-          //console.log('Accepted -> ' + key + ': ' + value.firstName + ' ' + value.lastName);
-          $scope.theRoster.push({id: key, firstName: value.firstName, lastName: value.lastName});
-        }
-        else
-        {
-          //console.log('Denied -> ' + key + ': ' + value.firstName + ' ' + value.lastName);
-        }
-      });
+        refRoster.child(theStudent.$id).set(
+          {
+            "firstName":theStudent.firstName,
+            "lastName":theStudent.lastName
+          }
+        );
+      }
+      else
+      {
+          console.log(theStudent);
+          console.log($scope.theRoster);
+      }
+    }
+
+    $scope.removeStudent = function(theStudent)
+    {
+      theRoster.$remove(theStudent);
+      console.log(theStudent);
+
+      console.log("removing " + theStudent.firstName + " " + theStudent.lastName);
+    };
+
+    $scope.removeClass = function(theClass)
+    {
+      console.log("removing " + theClass.className);
     };
   }
   else

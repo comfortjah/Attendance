@@ -36,6 +36,7 @@
               <td>Class Name</td>
               <td>Days</td>
               <td>Time</td>
+              <td>Edit</td>
             </tr>
           </thead>
           <tbody>
@@ -43,6 +44,7 @@
               <td><a href="javascript:void(0)" ng-click="selectClass(obj)"> {{ obj.className }} </a></td>
               <td>{{ obj.meetsDays }}</td>
               <td>{{ obj.timeStart }} to {{ obj.timeEnd }}</td>
+              <td><button ng-click="theClasses.$remove(obj)">Remove</button></td>
             </tr>
           </tbody>
         </table>
@@ -57,18 +59,29 @@
             <td>Student ID No.</td>
             <td>First Name</td>
             <td>Last Name</td>
-            <td>Button</td>
+            <td>Edit</td>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="student in theRoster">
-            <td>{{ student.id }}</td>
+            <td>{{ student.$id }}</td>
             <td>{{ student.firstName }}</td>
             <td>{{ student.lastName }}</td>
-            <td>Button</td>
+            <td><button ng-click="theRoster.$remove(student)">Remove</button></td>
           </tr>
         </tbody>
       </table>
+      <!-- ng-options="student.name as (student.lastName + ', ' + student.firstName) for student in allStudents" -->
+      <button ng-click="addingStudent = true">Add Student</button>
+      <div ng-show="addingStudent == true">
+        <select
+          ng-model="studentSelection"
+          data-ng-options="student as (student.lastName + ', ' + student.firstName) for student in allStudents"
+          ng-change="addStudent(studentSelection)"
+          class="form-control">
+          <option value="">Select Student</option>
+        </select>
+      </div>
     </div>
 
   </div>
