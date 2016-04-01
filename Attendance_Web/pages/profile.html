@@ -1,0 +1,149 @@
+<!doctype html>
+<html ng-app="profileApp">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+  <script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+  <script src="js/profile.js"></script>
+
+  <meta charset="UTF-8">
+  <title>Attendance Home</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+  <!--
+  <link rel="stylesheet" href="css/normalize.css">
+  !-->
+
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body ng-controller="MyController">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">Attendance</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a href="index.html">Attendance Viewer<span class="sr-only">(current)</span></a></li>
+          <li><a href="dashboard.html">Administrative Tasks</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="profile.html">Edit Profile</a></li>
+          <li ng-click="logout()"><a href="login.html">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Profile -->
+  <div class="box-container">
+
+    <div>
+      <h3>
+        Change Password
+        <span class="glyphicon glyphicon-menu-down" aria-hidden="true" ng-click="changingPassword = true"></span>
+      </h3>
+      <div ng-show="changingPassword == true">
+        <form name="newPasswordForm">
+          <fieldset class="form-group">
+            <label for="oldPassword">Old Password</label>
+            <input type="password" required class="form-control" ng-model="oldPassword" id="oldPassword">
+          </fieldset>
+          <fieldset class="form-group">
+            <label for="newPassword">New Password</label>
+            <input type="password" required class="form-control" ng-model="newPassword" id="newPassword">
+          </fieldset>
+          <fieldset class="form-group">
+            <label for="verificationPassword">Re-type New Password</label>
+            <input type="password" required class="form-control" ng-model="verificationPassword" id="verificationPassword">
+          </fieldset>
+
+          <div class="btn-group btn-group-justified">
+            <div class="btn-group">
+              <button
+                type="reset"
+                class="btn btn-danger"
+                style="outline: none;"
+                ng-click="changingPassword = false">
+                Cancel
+              </button>
+            </div>
+
+            <div class="btn-group">
+              <button
+                type="submit"
+                class="btn btn-success"
+                style="outline: none;"
+                ng-click="changePassword()">
+                Submit
+              </button>
+            </div>
+          </div>
+
+      </div>
+    </div>
+
+    <div>
+      <h3>
+        Change Email
+        <span class="glyphicon glyphicon-menu-down" aria-hidden="true" ng-click="changingEmail = true"></span>
+      </h3>
+      <div ng-show="changingEmail == true">
+        <form name="newEmailForm">
+          <fieldset class="form-group">
+            <label for="oldEmail">Old Email</label>
+            <input type="email" required class="form-control" ng-model="oldEmail" id="oldEmail">
+          </fieldset>
+          <fieldset class="form-group">
+            <label for="newEmail">New Email</label>
+            <input type="email" required class="form-control" ng-model="newEmail" id="newEmail">
+          </fieldset>
+          <fieldset class="form-group">
+            <label for="verificationEmail">Re-type New Email</label>
+            <input type="email" required class="form-control" ng-model="verificationEmail" id="verificationEmail">
+          </fieldset>
+          <fieldset class="form-group">
+            <label for="thePassword">Password</label>
+            <input type="password" required class="form-control" ng-model="thePassword" id="thePassword">
+          </fieldset>
+
+          <div class="btn-group btn-group-justified">
+            <div class="btn-group">
+              <button
+                type="reset"
+                class="btn btn-danger"
+                style="outline: none;"
+                ng-click="changingEmail = false">
+                Cancel
+              </button>
+            </div>
+
+            <div class="btn-group">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                style="outline: none;"
+                ng-click="changeEmail()">
+                Submit
+              </button>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

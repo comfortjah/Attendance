@@ -4,7 +4,13 @@ indexApp.controller("MyController", ["$scope", "$firebaseAuth",
 function($scope, $firebaseAuth)
 {
   var ref = new Firebase("https://attendance-cuwcs.firebaseio.com/");
-  var auth = $firebaseAuth(ref);
+  //var auth = $firebaseAuth(ref);
+  var authData = ref.getAuth();
+
+  if(authData)
+  {
+    window.location.href = 'index.html';
+  }
 
   $scope.login = function()
   {

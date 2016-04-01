@@ -6,6 +6,8 @@ function($scope, $firebaseAuth)
   var ref = new Firebase("https://attendance-cuwcs.firebaseio.com/");
   var auth = $firebaseAuth(ref);
 
+
+
   $scope.signup = function()
   {
     ref.createUser(
