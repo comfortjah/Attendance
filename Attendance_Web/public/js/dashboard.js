@@ -62,6 +62,7 @@ function($scope, $firebaseArray, $filter)
       {
       }
 
+      $scope.studentSelection = "";
       $scope.addingStudent = false;
     };
 

@@ -46,12 +46,12 @@
 
   <div class="signup" ng-app="signupApp" ng-controller="MyController">
     <h1>Attendance Management</h1>
-    <form novalidate>
-      <input type="text" placeholder="First Name" ng-model="firstName"><br>
-      <input type="text" placeholder="Last Name" ng-model="lastName"><br>
-      <input type="email" placeholder="Email" ng-model="email"><br>
-      <input type="password" placeholder="Password" ng-model="password">
-      <button class="btn btn-primary btn-block btn-large" ng-click="signup()">Sign Up</button>
+    <form name="signUpForm">
+      <input type="text" placeholder="First Name" ng-model="firstName" ng-required="true"><br>
+      <input type="text" placeholder="Last Name" ng-model="lastName" ng-required="true"><br>
+      <input type="email" placeholder="Email" ng-model="email" ng-required="true"><br>
+      <input type="password" placeholder="Password" ng-model="password" ng-required="true">
+      <button class="btn btn-primary btn-block btn-large" ng-click="signUpForm.$valid && signup()">Sign Up</button>
     </form>
   </div>
 

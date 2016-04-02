@@ -91,30 +91,56 @@
 
       <div ng-show="addingClass == true">
         <h3>Add a Class</h3>
-        <form name="newClass" class="new-class">
+        <form name="newClassForm" class="new-class">
           <fieldset class="form-group">
             <label for="CRN">CRN:</label>
-            <input type="number" placeholder="31011" min="0" max="99999" required class="form-control" ng-model="CRN" id="CRN">
+            <input
+              type="number"
+              placeholder="31011"
+              min="0" max="99999"
+              ng-required="true"
+              class="form-control"
+              data-toggle="tooltip" data-placement="top" title="The 5-digit CRN number for the class"
+              ng-model="CRN" id="CRN">
           </fieldset>
 
           <fieldset class="form-group">
             <label for="building">Building:</label>
-            <input type="text" placeholder="Stuenkel" required class="form-control" ng-model="building" id="building">
+            <input type="text"
+              placeholder="Stuenkel"
+              ng-required="true"
+              class="form-control"
+              data-toggle="tooltip" data-placement="top" title="The building where the class meets"
+              ng-model="building" id="building">
           </fieldset>
 
           <fieldset class="form-group">
             <label for="roomNumber">Room Number:</label>
-            <input type="text" placeholder="016" required class="form-control" ng-model="roomNumber" id="roomNumber">
+            <input
+              type="text"
+              placeholder="016"
+              ng-required="true"
+              data-toggle="tooltip" data-placement="top" title="The room number where the class meets"
+              class="form-control"
+              ng-model="roomNumber" id="roomNumber">
           </fieldset>
 
           <fieldset class="form-group">
             <label for="courseNumber">Course Number:</label>
-            <input type="number" placeholder="101" min="100" max="999" required class="form-control" ng-model="courseNumber" id="courseNumber">
+            <input
+              type="number"
+              placeholder="101"
+              min="100"
+              max="999"
+              ng-required="true"
+              data-toggle="tooltip" data-placement="top" title="The number from the course name"
+              class="form-control"
+              ng-model="courseNumber" id="courseNumber">
           </fieldset>
 
           <fieldset class="form-group">
             <label for="days">Days:</label>
-            <select multiple required class="form-control" ng-model="days" id="days">
+            <select multiple ng-required="true" class="form-control" ng-model="days" id="days">
               <option value="M">Monday</option>
               <option value="T">Tuesday</option>
               <option value="W">Wednesday</option>
@@ -125,12 +151,12 @@
 
           <fieldset class="form-group">
             <label for="startTime">Start Time:</label>
-            <input type="time" required class="form-control" ng-model="startTime" id="startTime">
+            <input type="time" ng-required="true" class="form-control" ng-model="startTime" id="startTime">
           </fieldset>
 
           <fieldset class="form-group">
             <label for="endTime">End Time:</label>
-            <input type="time" required class="form-control" ng-model="endTime" id="endTime">
+            <input type="time" ng-required="true" class="form-control" ng-model="endTime" id="endTime">
           </fieldset>
 
           <div class="btn-group btn-group-justified">
@@ -149,7 +175,7 @@
                 type="submit"
                 class="btn btn-success"
                 style="outline: none;"
-                ng-click="addClass()">
+                ng-click="newClassForm.$valid && addClass()">
                 Submit
               </button>
             </div>

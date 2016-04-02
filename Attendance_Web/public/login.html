@@ -46,10 +46,10 @@
 
   <div class="login" ng-app="indexApp" ng-controller="MyController">
     <h1>Attendance Management</h1>
-    <form novalidate>
-      <input type="email" placeholder="Email" ng-model="username"><br>
-      <input type="password" placeholder="Password" ng-model="password">
-      <button class="btn btn-primary btn-block btn-large" ng-click="login()">Login</button>
+    <form name="loginForm">
+      <input type="email" placeholder="Email" ng-model="username" ng-required="true"><br>
+      <input type="password" placeholder="Password" ng-model="password" ng-required="true">
+      <button class="btn btn-primary btn-block btn-large" ng-click="loginForm.$valid && login()">Login</button>
     </form>
   </div>
 
