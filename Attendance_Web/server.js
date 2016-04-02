@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
-var http = require('http').createServer(app).listen('8080', function()
+app.set('port', (process.env.PORT || 5000));
+var http = require('http').createServer(app).listen(app.get('port'), function()
 {
     console.log('Server running.');
 });
