@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		232C7D291CB58E2B00CE69EC /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232C7D281CB58E2B00CE69EC /* SearchVC.swift */; };
 		232F5A2C1C82808C0013044E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232F5A2B1C82808C0013044E /* AppDelegate.swift */; };
 		232F5A2E1C82808C0013044E /* AuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232F5A2D1C82808C0013044E /* AuthVC.swift */; };
 		232F5A311C82808C0013044E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 232F5A2F1C82808C0013044E /* Main.storyboard */; };
@@ -17,10 +18,10 @@
 		232F5A601C8281750013044E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 232F5A5F1C8281750013044E /* CFNetwork.framework */; };
 		232F5A621C82817F0013044E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 232F5A611C82817F0013044E /* Security.framework */; };
 		232F5A651C83B5080013044E /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 232F5A641C83B5080013044E /* Firebase.framework */; };
-		236A82E71C879EFA00579E3E /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236A82E61C879EFA00579E3E /* DashboardVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		232C7D281CB58E2B00CE69EC /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		232F5A281C82808C0013044E /* Attendance_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Attendance_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		232F5A2B1C82808C0013044E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		232F5A2D1C82808C0013044E /* AuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVC.swift; sourceTree = "<group>"; };
@@ -34,7 +35,6 @@
 		232F5A611C82817F0013044E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		232F5A631C8281890013044E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		232F5A641C83B5080013044E /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
-		236A82E61C879EFA00579E3E /* DashboardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,10 +81,10 @@
 				232F5A2B1C82808C0013044E /* AppDelegate.swift */,
 				232F5A2D1C82808C0013044E /* AuthVC.swift */,
 				232F5A2F1C82808C0013044E /* Main.storyboard */,
-				236A82E61C879EFA00579E3E /* DashboardVC.swift */,
 				232F5A321C82808C0013044E /* Assets.xcassets */,
 				232F5A341C82808C0013044E /* LaunchScreen.storyboard */,
 				232F5A371C82808C0013044E /* Info.plist */,
+				232C7D281CB58E2B00CE69EC /* SearchVC.swift */,
 			);
 			path = Attendance_iOS;
 			sourceTree = "<group>";
@@ -161,8 +161,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				232C7D291CB58E2B00CE69EC /* SearchVC.swift in Sources */,
 				232F5A2E1C82808C0013044E /* AuthVC.swift in Sources */,
-				236A82E71C879EFA00579E3E /* DashboardVC.swift in Sources */,
 				232F5A2C1C82808C0013044E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

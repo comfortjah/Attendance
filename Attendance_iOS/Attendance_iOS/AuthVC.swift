@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  AuthVC.swift
 //  Attendance_iOS
 //
 //  Created by Jake Wert on 2/27/16.
@@ -50,6 +50,7 @@ class AuthVC: UIViewController
     
     @IBAction func signUpAction()
     {
+        /*
         let myRootRef = Firebase(url:"https://attendance-cuwcs.firebaseio.com")
         
         myRootRef.createUser(self.usernameTextField.text, password: self.passwordTextField.text,
@@ -65,6 +66,7 @@ class AuthVC: UIViewController
                     print("Successfully created user account with uid: \(uid)")
                 }
         })
+        */
     }
     
     func alert(message:String)
