@@ -1,0 +1,6 @@
+framework module Pods_Attendance_iOS {
+  umbrella header "Pods-Attendance_iOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

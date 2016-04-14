@@ -1,3 +1,5 @@
+
+
 var express = require('express');
 var bodyParser = require('body-parser');
 var Firebase = require('firebase');
@@ -17,23 +19,23 @@ var http = require('http').createServer(app).listen(app.get('port'), function()
 });
 
 // Express routing directive.
-// Put all your HTML, CSS, JavaScript, etc. files in '/public_html'.
+// Put all your HTML, CSS, JavaScript, etc. files in '/public'.
 // This works just like a normal webserver, a la Apache.
 app.use(express.static(__dirname + '/public'));
 
-// ROUTES
+// API ROUTES
 // ==========================================================
-var router = express.Router();
+var apiRouter = express.Router();
 
 // Manages all API Requests
-router.use(function(req, res, next)
+apiRouter.use(function(req, res, next)
 {
     // do logging
     console.log('API Request');
     next(); // make sure we go to the next routes and don't stop here
 });
 
-router.route('/attendance')
+apiRouter.route('/attendance')
     .get(function(req, res)
     {
       var theClassesRef = ref.child('Classes');
@@ -56,7 +58,7 @@ router.route('/attendance')
       });
     });
 
-router.route('/attendance/className/:class_name')
+apiRouter.route('/attendance/className/:class_name')
     .get(function(req, res)
     {
       var theClassesRef = ref.child('Classes');
@@ -82,7 +84,7 @@ router.route('/attendance/className/:class_name')
       });
     });
 
-router.route('/attendance/instructor/:instructor')
+apiRouter.route('/attendance/instructor/:instructor')
     .get(function(req, res)
     {
       var theClassesRef = ref.child('Classes');
@@ -108,21 +110,21 @@ router.route('/attendance/instructor/:instructor')
       });
     });
 
-router.route('/attendance/className/:class_name/date/:date')
+apiRouter.route('/attendance/className/:class_name/date/:date')
     .get(function(req, res)
     {
       //TODO once we have dummy attendance data we will write this
       res.send(req.params.class_name + ' ' + req.params.date);
     });
 
-router.route('/attendance/className/:class_name/:firstName/:lastName')
+apiRouter.route('/attendance/className/:class_name/:firstName/:lastName')
     .get(function(req, res)
     {
       //TODO once we have dummy attendance data we will write this
       res.send(req.params.firstName + ' ' + req.params.lastName);
     });
 
-router.route('/students')
+apiRouter.route('/students')
     .get(function(req, res)
     {
       var theStudentsRef = ref.child('Students');
@@ -137,7 +139,7 @@ router.route('/students')
       });
     });
 
-router.route('/roster')
+apiRouter.route('/roster')
     .get(function(req, res)
     {
       var theClassesRef = ref.child('Classes');
@@ -160,7 +162,7 @@ router.route('/roster')
       });
     });
 
-router.route('/roster/className/:class_name')
+apiRouter.route('/roster/className/:class_name')
     .get(function(req, res)
     {
       var theClassesRef = ref.child('Classes');
@@ -188,7 +190,7 @@ router.route('/roster/className/:class_name')
     });
 
 // Register the routes
-app.use('/api' , router);
+app.use('/api' , apiRouter);
 
 app.use(function(req, res)
 {

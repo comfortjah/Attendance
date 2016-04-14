@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0720"
+   LastUpgradeVersion = "0730"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "232F5A271C82808C0013044E"
+               BlueprintIdentifier = "2385EDB01CBF0B3E00BB597F"
                BuildableName = "Attendance_iOS.app"
                BlueprintName = "Attendance_iOS"
                ReferencedContainer = "container:Attendance_iOS.xcodeproj">
@@ -28,31 +28,11 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "232F5A3B1C82808C0013044E"
-               BuildableName = "Attendance_iOSTests.xctest"
-               BlueprintName = "Attendance_iOSTests"
-               ReferencedContainer = "container:Attendance_iOS.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "232F5A461C82808C0013044E"
-               BuildableName = "Attendance_iOSUITests.xctest"
-               BlueprintName = "Attendance_iOSUITests"
-               ReferencedContainer = "container:Attendance_iOS.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "232F5A271C82808C0013044E"
+            BlueprintIdentifier = "2385EDB01CBF0B3E00BB597F"
             BuildableName = "Attendance_iOS.app"
             BlueprintName = "Attendance_iOS"
             ReferencedContainer = "container:Attendance_iOS.xcodeproj">
@@ -75,7 +55,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "232F5A271C82808C0013044E"
+            BlueprintIdentifier = "2385EDB01CBF0B3E00BB597F"
             BuildableName = "Attendance_iOS.app"
             BlueprintName = "Attendance_iOS"
             ReferencedContainer = "container:Attendance_iOS.xcodeproj">
@@ -94,7 +74,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "232F5A271C82808C0013044E"
+            BlueprintIdentifier = "2385EDB01CBF0B3E00BB597F"
             BuildableName = "Attendance_iOS.app"
             BlueprintName = "Attendance_iOS"
             ReferencedContainer = "container:Attendance_iOS.xcodeproj">

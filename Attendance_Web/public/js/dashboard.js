@@ -24,7 +24,7 @@ function($scope, $firebaseArray, $filter)
         if(authData.uid == key)
         {
           console.log(key + " : " + value);
-          $scope.professor = value.lastName;
+          $scope.professor = value
         }
       });
     });
