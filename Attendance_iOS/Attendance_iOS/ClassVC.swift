@@ -2,7 +2,7 @@
 //  ClassVC.swift
 //  Attendance_iOS
 //
-//  Created by Jake Wert on 4/14/16.
+//  Created by Jake Wert on 4/13/16.
 //  Copyright © 2016 Jake Wert. All rights reserved.
 //
 
@@ -28,6 +28,7 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     var theRoster: [String:JSON]!
     
     var classKey: String!
+    var attendanceDate: String!
     
     var ref: Firebase!
     
@@ -159,7 +160,10 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     {
         if(tableView === self.attendanceTableView)
         {
-            print("Selected: \(self.attendanceKeys[indexPath.row])")
+            self.attendanceDate = self.attendanceKeys[indexPath.row]
+            print("Selected: \(self.attendanceDate)")
+            
+            self.performSegueWithIdentifier("toAttendance", sender: nil)
         }
         else
         {
@@ -180,7 +184,9 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
         else if (segue.identifier == "toAttendance")
         {
-            //let destinationVC:AddStudentVC = segue.destinationViewController as! AddStudentVC
+            let destinationVC:AttendanceVC = segue.destinationViewController as! AttendanceVC
+            destinationVC.classKey = self.classKey
+            destinationVC.attendanceDate = self.attendanceDate
         }
     }
 }

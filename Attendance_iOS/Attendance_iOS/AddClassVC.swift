@@ -2,7 +2,7 @@
 //  AddClass.swift
 //  Attendance_iOS
 //
-//  Created by Jake Wert on 4/14/16.
+//  Created by Jake Wert on 4/13/16.
 //  Copyright © 2016 Jake Wert. All rights reserved.
 //
 

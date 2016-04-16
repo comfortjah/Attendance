@@ -697,10 +697,10 @@
             </objects>
             <point key="canvasLocation" x="1208" y="773"/>
         </scene>
-        <!--View Controller-->
+        <!--AttendanceVC-->
         <scene sceneID="gb1-rx-Oa5">
             <objects>
-                <viewController id="Mol-M0-jq6" sceneMemberID="viewController">
+                <viewController id="Mol-M0-jq6" customClass="AttendanceVC" customModule="Attendance_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rrH-tO-mxc"/>
                         <viewControllerLayoutGuide type="bottom" id="PDB-VQ-3e2"/>
@@ -709,11 +709,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="otK-w5-B58">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="otK-w5-B58">
                                 <rect key="frame" x="0.0" y="60" width="600" height="836"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Mol-M0-jq6" id="hbe-uf-TFC"/>
+                                    <outlet property="delegate" destination="Mol-M0-jq6" id="tfr-Rz-wGJ"/>
+                                </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5e-kH-mQb">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5e-kH-mQb">
                                 <rect key="frame" x="20" y="28" width="560" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -721,7 +725,20 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="r5e-kH-mQb" firstAttribute="top" secondItem="rrH-tO-mxc" secondAttribute="bottom" constant="8" symbolic="YES" id="0WJ-1N-cVr"/>
+                            <constraint firstItem="otK-w5-B58" firstAttribute="bottom" secondItem="PDB-VQ-3e2" secondAttribute="top" id="4II-3S-yBa"/>
+                            <constraint firstAttribute="trailing" secondItem="otK-w5-B58" secondAttribute="trailing" id="CXG-UK-mQk"/>
+                            <constraint firstItem="r5e-kH-mQb" firstAttribute="centerX" secondItem="otK-w5-B58" secondAttribute="centerX" id="D5A-qp-NeO"/>
+                            <constraint firstItem="r5e-kH-mQb" firstAttribute="leading" secondItem="kQR-z9-Y2B" secondAttribute="leadingMargin" id="Ejh-tg-gVT"/>
+                            <constraint firstItem="otK-w5-B58" firstAttribute="leading" secondItem="kQR-z9-Y2B" secondAttribute="leading" id="e7c-BT-D2H"/>
+                            <constraint firstItem="otK-w5-B58" firstAttribute="top" secondItem="r5e-kH-mQb" secondAttribute="bottom" constant="8" symbolic="YES" id="pf1-f0-Pol"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="attendanceTableView" destination="otK-w5-B58" id="Wdw-pe-RSw"/>
+                        <outlet property="dateLabel" destination="r5e-kH-mQb" id="PaB-gS-jWa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xYe-xU-Xmy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
