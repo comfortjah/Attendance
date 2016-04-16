@@ -66,7 +66,7 @@
           <tbody>
             <tr ng-repeat="obj in classes">
               <td><a href="javascript:void(0)" ng-click="selectClass(obj)"> {{ obj.className }} </a></td>
-              <td>{{ obj.instructor }}</td>
+              <td>{{ obj.instructor.firstName }} {{ obj.instructor.lastName }}</td>
             </tr>
           </tbody>
         </table>

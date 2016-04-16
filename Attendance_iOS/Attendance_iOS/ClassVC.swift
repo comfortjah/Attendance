@@ -13,6 +13,10 @@ import SwiftyJSON
 
 class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
+    @IBOutlet weak var daysLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var roomLabel: UILabel!
+    
     @IBOutlet var rosterTableView: UITableView!
     @IBOutlet var attendanceTableView: UITableView!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -21,6 +25,7 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     var attendanceKeys: [String]!
     var rosterKeys: [String]!
+    var theRoster: [String:JSON]!
     
     var classKey: String!
     
@@ -36,9 +41,10 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         self.attendanceKeys = []
         self.rosterKeys = []
+        self.theRoster = [:]
         
-        self.rosterTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.attendanceTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.rosterTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
     override func didReceiveMemoryWarning()
@@ -59,10 +65,15 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 self.attendanceKeys.append(key)
             }
             
+            self.theRoster = json["Roster"].dictionaryValue
             for (key, value) in json["Roster"]
             {
                 self.rosterKeys.append(key)
             }
+            
+            self.daysLabel.text = json["days"].stringValue
+            self.timeLabel.text = "\(json["startTime"].stringValue) to \(json["endTime"].stringValue)"
+            self.roomLabel.text = json["room"].stringValue
             
             self.attendanceTableView.reloadData()
             
@@ -76,6 +87,16 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     //These are the delegate functions for a UITableView
     
+    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle
+    {
+        if(tableView === self.attendanceTableView)
+        {
+            return UITableViewCellEditingStyle.None
+        }
+        
+        return UITableViewCellEditingStyle.Delete;
+    }
+    
     //This function is fired when editing cells in the UITableView.
     //It currently only supports deletion.
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
@@ -83,14 +104,7 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         if editingStyle == .Delete
         {
             //TODO delete item from Firebase
-            if(tableView === self.attendanceTableView)
-            {
-                print("Removed: \(self.attendanceKeys[indexPath.row])")
-            }
-            else
-            {
-                print("Removed: \(self.rosterKeys[indexPath.row])")
-            }
+            print("Removed: \(self.rosterKeys[indexPath.row])")
             
             //items.removeAtIndex(indexPath.row)
             //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
@@ -128,7 +142,12 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         {
             let cell: UITableViewCell = self.rosterTableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
             
-            cell.textLabel?.text = self.rosterKeys[indexPath.row]
+            let key = self.rosterKeys[indexPath.row]
+            let student = self.theRoster[key]!
+            let firstName = student["lastName"].stringValue
+            let lastName = student["firstName"].stringValue
+            
+            cell.textLabel?.text = "\(lastName), \(firstName)"
             print("Cell \(indexPath.row) : \(cell.textLabel?.text)")
             
             return cell
@@ -150,5 +169,18 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         //TODO Prepare for segue to class viewController (pass selectedClass)
     }
+    
+    override func prepareForSegue(segue: (UIStoryboardSegue!), sender: AnyObject!)
+    {
+        if (segue.identifier == "toSelectStudent")
+        {
+            let destinationVC:AddStudentVC = segue.destinationViewController as! AddStudentVC
+            
+            destinationVC.classKey = self.classKey
+        }
+        else if (segue.identifier == "toAttendance")
+        {
+            //let destinationVC:AddStudentVC = segue.destinationViewController as! AddStudentVC
+        }
+    }
 }
-
