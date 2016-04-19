@@ -13,7 +13,7 @@ import SwiftyJSON
 
 class AddStudentVC: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
-    @IBOutlet var studentTableView: UITableView!
+    @IBOutlet weak var studentTableView: UITableView!
     
     var classKey: String!
     var theStudents: [JSON]!
@@ -21,12 +21,14 @@ class AddStudentVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     var ref: Firebase!
     
+    @IBAction func backAction(sender: AnyObject)
+    {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        self.theStudents = []
-        self.theStudentIDS = []
         
         self.ref = Firebase(url: "https://attendance-cuwcs.firebaseio.com")
         
@@ -40,6 +42,9 @@ class AddStudentVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     override func viewWillAppear(animated: Bool)
     {
+        self.theStudents = []
+        self.theStudentIDS = []
+        
         let refStudents = ref.childByAppendingPath("Students")
         
         refStudents.observeSingleEventOfType(.Value, withBlock:
@@ -104,16 +109,18 @@ class AddStudentVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             (error:NSError?, ref:Firebase!) in
             if (error != nil)
             {
-                print("Data could not be saved.")
+                self.alert("Unable to add the student.")
             }
-            else
-            {
-                print("Data saved successfully!")
-            }
+            
+            self.dismissViewControllerAnimated(true, completion: nil)
         })
+    }
+    
+    func alert(message:String)
+    {
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
         
-        //add the selected student to the class roster
-        
-        //UNWIND
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
 }

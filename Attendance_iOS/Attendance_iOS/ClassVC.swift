@@ -17,8 +17,8 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var roomLabel: UILabel!
     
-    @IBOutlet var rosterTableView: UITableView!
-    @IBOutlet var attendanceTableView: UITableView!
+    @IBOutlet weak var rosterTableView: UITableView!
+    @IBOutlet weak var attendanceTableView: UITableView!
     @IBOutlet weak var scrollView: UIScrollView!
     
     var instructor: JSON!
@@ -32,6 +32,11 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     var ref: Firebase!
     
+    @IBAction func backAction(sender: AnyObject)
+    {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -39,10 +44,6 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         self.ref = Firebase(url: "https://attendance-cuwcs.firebaseio.com")
         
         self.scrollView.contentSize.height = 846
-        
-        self.attendanceKeys = []
-        self.rosterKeys = []
-        self.theRoster = [:]
         
         self.attendanceTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.rosterTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -55,19 +56,23 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     override func viewWillAppear(animated: Bool)
     {
+        self.attendanceKeys = []
+        self.rosterKeys = []
+        self.theRoster = [:]
+        
         let refClass = ref.childByAppendingPath("Classes").childByAppendingPath(self.classKey)
         refClass.observeSingleEventOfType(.Value, withBlock:
         { snapshot in
                 
             let json = JSON(snapshot.value)
             
-            for (key,value) in json["Attendance"]
+            for (key,_) in json["Attendance"]
             {
                 self.attendanceKeys.append(key)
             }
             
             self.theRoster = json["Roster"].dictionaryValue
-            for (key, value) in json["Roster"]
+            for (key, _) in json["Roster"]
             {
                 self.rosterKeys.append(key)
             }
@@ -104,11 +109,27 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     {
         if editingStyle == .Delete
         {
-            //TODO delete item from Firebase
-            print("Removed: \(self.rosterKeys[indexPath.row])")
+            let studentID = self.rosterKeys[indexPath.row]
+            let refStudent = ref.childByAppendingPath("Classes").childByAppendingPath(self.classKey).childByAppendingPath("Roster").childByAppendingPath(studentID)
             
-            //items.removeAtIndex(indexPath.row)
-            //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            refStudent.removeValueWithCompletionBlock(
+            {
+                (error:NSError?, ref:Firebase!) in
+                if (error != nil)
+                {
+                    //alert
+                }
+                else
+                {
+                    //When I change from once event to regular listener, firebaes will take care of this
+                    self.rosterKeys.removeAtIndex(indexPath.row)
+                    self.theRoster.removeValueForKey(studentID)
+                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                    print("Data removed successfully!")
+                }
+            })
+            
+            print("Removed: \(studentID)")
         }
     }
     
@@ -169,9 +190,6 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         {
             print("Selected: \(self.rosterKeys[indexPath.row])")
         }
-        
-        
-        //TODO Prepare for segue to class viewController (pass selectedClass)
     }
     
     override func prepareForSegue(segue: (UIStoryboardSegue!), sender: AnyObject!)

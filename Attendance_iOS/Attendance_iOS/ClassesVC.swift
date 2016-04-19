@@ -13,7 +13,8 @@ import SwiftyJSON
 
 class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var instructorLabel: UILabel!
     
     var instructor: JSON!
     var classKey: String!
@@ -23,6 +24,13 @@ class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     var ref: Firebase!
     var refClasses: Firebase!
     
+    @IBAction func signOutAction(sender: AnyObject)
+    {
+        self.ref.unauth()
+        //self.dismissViewControllerAnimated(true, completion: nil)
+        self.view.window!.rootViewController?.dismissViewControllerAnimated(false, completion: nil)
+
+    }
     
     override func viewDidLoad()
     {
@@ -30,9 +38,6 @@ class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         self.ref = Firebase(url: "https://attendance-cuwcs.firebaseio.com")
         self.refClasses = ref.childByAppendingPath("Classes")
-        
-        self.classesJSON = []
-        self.classKeys = []
         
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
@@ -44,18 +49,23 @@ class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     override func viewWillAppear(animated: Bool)
     {
+        self.classesJSON = []
+        self.classKeys = []
+        
         self.refClasses.observeSingleEventOfType(.Value, withBlock:
             { snapshot in
                 let json = JSON(snapshot.value)
                 for (key, value) in json
                 {
-                    //for each class (key is some hash, value is JSON obj with properties)
                     if(value["instructor"] == self.instructor)
                     {
                         self.classKeys.append(key)
                         self.classesJSON.append(value)
                     }
                 }
+                
+                let instructorText = "Professor \(self.instructor["lastName"])"
+                self.instructorLabel.text = instructorText
                 self.tableView.reloadData()
         })
     }
@@ -74,8 +84,23 @@ class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         {
             //TODO delete item from Firebase
             print("Removed: \(self.classesJSON[indexPath.row]["className"].stringValue)")
-            //items.removeAtIndex(indexPath.row)
-            //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            
+            let refClass = ref.childByAppendingPath("Classes").childByAppendingPath(self.classKey)
+            
+            refClass.removeValueWithCompletionBlock(
+            { (error:NSError?, ref:Firebase!) in
+                if (error != nil)
+                {
+                    self.alert("Unable to delete the class.")
+                }
+                else
+                {
+                    //When I change from once event to regular listener, firebaes will take care of this
+                    self.classKeys.removeAtIndex(indexPath.row)
+                    self.classesJSON.removeAtIndex(indexPath.row)
+                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                }
+            })
         }
     }
     
@@ -120,5 +145,20 @@ class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             destinationVC.instructor = self.instructor
             destinationVC.classKey = self.classKey
         }
+        else if(segue.identifier == "toAddClass")
+        {
+            let destinationVC:AddClassVC = segue.destinationViewController as! AddClassVC
+            
+            destinationVC.instructor = self.instructor
+        }
      }
+    
+    func alert(message:String)
+    {
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
 }

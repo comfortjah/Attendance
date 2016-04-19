@@ -13,8 +13,8 @@ import SwiftyJSON
 
 class AttendanceVC: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
-    @IBOutlet var attendanceTableView: UITableView!
-    @IBOutlet var dateLabel: UILabel!
+    @IBOutlet weak var attendanceTableView: UITableView!
+    @IBOutlet weak var dateLabel: UILabel!
     
     var classKey: String!
     var attendanceDate: String!
@@ -25,13 +25,15 @@ class AttendanceVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     var ref: Firebase!
     
+    @IBAction func backAction(sender: AnyObject)
+    {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        self.theRoster = JSON("{}")
-        self.theStudentIDs = []
-        self.attendanceRecords = []
         self.dateLabel.text = self.attendanceDate
         
         ref = Firebase(url: "https://attendance-cuwcs.firebaseio.com")
@@ -46,18 +48,17 @@ class AttendanceVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     override func viewWillAppear(animated: Bool)
     {
+        self.theRoster = JSON("{}")
+        self.theStudentIDs = []
+        self.attendanceRecords = []
+        
         let refRoster = ref.childByAppendingPath("Classes").childByAppendingPath(self.classKey).childByAppendingPath("Roster")
         
         let refDate = ref.childByAppendingPath("Classes").childByAppendingPath(self.classKey).childByAppendingPath("Attendance").childByAppendingPath(self.attendanceDate)
         
-        print(refRoster)
-        print(refDate)
-        
         refRoster.observeSingleEventOfType(.Value, withBlock:
             { snapshot in
                 self.theRoster = JSON(snapshot.value)
-                
-                print("Roster : \(self.theRoster)")
                 
                 self.attendanceTableView.reloadData()
             })
@@ -73,9 +74,6 @@ class AttendanceVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                     self.theStudentIDs.append(studentID)
                     self.attendanceRecords.append(time.stringValue)
                 }
-                
-                print("Student IDs: \(self.theStudentIDs)")
-                print("Records: \(self.attendanceRecords)")
                 
                 self.attendanceTableView.reloadData()
             })

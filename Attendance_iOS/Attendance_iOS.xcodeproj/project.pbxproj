@@ -17,6 +17,7 @@
 		239CDC4F1CBFDFBC003F7542 /* ClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239CDC4E1CBFDFBC003F7542 /* ClassVC.swift */; };
 		239CDC511CC183A6003F7542 /* AddStudentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239CDC501CC183A6003F7542 /* AddStudentVC.swift */; };
 		239CDC531CC2BD96003F7542 /* AttendanceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239CDC521CC2BD96003F7542 /* AttendanceVC.swift */; };
+		239CDC551CC41DFF003F7542 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239CDC541CC41DFF003F7542 /* SignUpVC.swift */; };
 		B8532DC47B8BA461EF2C50E1 /* Pods_Attendance_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAA0C18BBB4F67D0DC12BFB4 /* Pods_Attendance_iOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,7 +33,8 @@
 		239CDC4C1CBFDF57003F7542 /* AddClassVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddClassVC.swift; sourceTree = "<group>"; };
 		239CDC4E1CBFDFBC003F7542 /* ClassVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassVC.swift; sourceTree = "<group>"; };
 		239CDC501CC183A6003F7542 /* AddStudentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStudentVC.swift; sourceTree = "<group>"; };
-		239CDC521CC2BD96003F7542 /* AttendanceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceVC.swift; sourceTree = "<group>"; };
+		239CDC521CC2BD96003F7542 /* AttendanceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceVC.swift; sourceTree = "<group>"; tabWidth = 3; };
+		239CDC541CC41DFF003F7542 /* SignUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		242FBCF76ADF464B5319E711 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CBAACE0E9A628FB112FC1D54 /* Pods-Attendance_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Attendance_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Attendance_iOS/Pods-Attendance_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		EAA0C18BBB4F67D0DC12BFB4 /* Pods_Attendance_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Attendance_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,6 +79,7 @@
 				2385EDBD1CBF0B3E00BB597F /* LaunchScreen.storyboard */,
 				2385EDB81CBF0B3E00BB597F /* Main.storyboard */,
 				2385EDC61CBF0CA700BB597F /* AuthVC.swift */,
+				239CDC541CC41DFF003F7542 /* SignUpVC.swift */,
 				231E147A1CBF13BE007DCD31 /* ClassesVC.swift */,
 				239CDC4C1CBFDF57003F7542 /* AddClassVC.swift */,
 				239CDC4E1CBFDFBC003F7542 /* ClassVC.swift */,
@@ -229,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				239CDC551CC41DFF003F7542 /* SignUpVC.swift in Sources */,
 				239CDC4D1CBFDF57003F7542 /* AddClassVC.swift in Sources */,
 				239CDC4F1CBFDFBC003F7542 /* ClassVC.swift in Sources */,
 				239CDC531CC2BD96003F7542 /* AttendanceVC.swift in Sources */,
