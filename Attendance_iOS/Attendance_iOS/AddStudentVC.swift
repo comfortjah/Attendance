@@ -89,7 +89,6 @@ class AddStudentVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         let theStudent = self.theStudents[indexPath.row]
         
         cell.textLabel?.text = "\(theStudent["lastName"].stringValue), \(theStudent["firstName"].stringValue)"
-        print("Cell \(indexPath.row) : \(cell.textLabel?.text)")
         
         return cell
     }
@@ -98,7 +97,6 @@ class AddStudentVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         let theStudent = self.theStudents[indexPath.row]
-        print("Selected: \(theStudent)")
         
         let refStudent = ref.childByAppendingPath("Classes").childByAppendingPath(self.classKey).childByAppendingPath("Roster").childByAppendingPath(self.theStudentIDS[indexPath.row])
         

@@ -125,11 +125,8 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                     self.rosterKeys.removeAtIndex(indexPath.row)
                     self.theRoster.removeValueForKey(studentID)
                     tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-                    print("Data removed successfully!")
                 }
             })
-            
-            print("Removed: \(studentID)")
         }
     }
     
@@ -138,12 +135,10 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     {
         if(tableView === self.attendanceTableView)
         {
-            print("Attendance: \(self.attendanceKeys.count) rows")
             return self.attendanceKeys.count
         }
         else
         {
-            print("Roster: \(self.rosterKeys.count) rows")
             return self.rosterKeys.count
         }
     }
@@ -156,7 +151,6 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             let cell: UITableViewCell = self.attendanceTableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
             
             cell.textLabel?.text = self.attendanceKeys[indexPath.row]
-            print("Cell \(indexPath.row) : \(cell.textLabel?.text)")
             
             return cell
         }
@@ -170,7 +164,6 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             let lastName = student["firstName"].stringValue
             
             cell.textLabel?.text = "\(lastName), \(firstName)"
-            print("Cell \(indexPath.row) : \(cell.textLabel?.text)")
             
             return cell
         }
@@ -182,13 +175,8 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         if(tableView === self.attendanceTableView)
         {
             self.attendanceDate = self.attendanceKeys[indexPath.row]
-            print("Selected: \(self.attendanceDate)")
             
             self.performSegueWithIdentifier("toAttendance", sender: nil)
-        }
-        else
-        {
-            print("Selected: \(self.rosterKeys[indexPath.row])")
         }
     }
     

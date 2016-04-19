@@ -67,8 +67,6 @@ class AttendanceVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             { snapshot in
                 let json = JSON(snapshot.value)
                 
-                print("refDate : \(json)")
-                
                 for (studentID, time) in json
                 {
                     self.theStudentIDs.append(studentID)

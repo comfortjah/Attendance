@@ -6,6 +6,7 @@
 //  Copyright © 2016 Jake Wert. All rights reserved.
 //
 
+
 import UIKit
 import Firebase
 import SystemConfiguration
@@ -81,10 +82,7 @@ class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
     {
         if editingStyle == .Delete
-        {
-            //TODO delete item from Firebase
-            print("Removed: \(self.classesJSON[indexPath.row]["className"].stringValue)")
-            
+        {   
             let refClass = ref.childByAppendingPath("Classes").childByAppendingPath(self.classKey)
             
             refClass.removeValueWithCompletionBlock(
@@ -107,7 +105,6 @@ class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     //This function exists to determine the number of cells for the UITableView
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        print("\(String(self.classesJSON.count)) rows")
         return self.classesJSON.count
     }
     
@@ -120,19 +117,14 @@ class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         cell.textLabel?.text = cellTextStr
         
-        print("Cell \(indexPath.row) : \(cell.textLabel?.text)")
-        
         return cell
     }
     
     //This function fire when you select a cell
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        //TODO selectedClass = self.items[indexPath.row]
-        print("Selected: \(self.classesJSON[indexPath.row])")
         self.classKey = self.classKeys[indexPath.row]
         
-        //TODO Prepare for segue to class viewController (pass selectedClass)
         self.performSegueWithIdentifier("toClass", sender: nil)
     }
     
