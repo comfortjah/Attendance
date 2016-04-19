@@ -61,14 +61,14 @@ class SignUpVC: UIViewController
                     else
                     {
                         let uid = result["uid"] as! String
-                        print("Successfully created user account with uid: \(uid)")
                         
                         self.ref.authUser(self.emailTextField.text, password: self.passwordTextField.text,
                             withCompletionBlock:
                             { error, authData in
                                 if error != nil
                                 {
-                                    self.errorLabel.text = "Unable to authenticate you."
+                                    self.alert("Unable to fully create your account. Please contact the administrator, have your account deleted, and try again.")
+                                    self.dismissViewControllerAnimated(true, completion: nil)
                                 }
                                 else
                                 {
@@ -80,11 +80,11 @@ class SignUpVC: UIViewController
                                             (error:NSError?, ref:Firebase!) in
                                             if (error != nil)
                                             {
-                                                print("Data could not be saved.")
+                                                self.alert("Unable to fully create your account. Please contact the administrator, have your account deleted, and try again.")
+                                                self.dismissViewControllerAnimated(true, completion: nil)
                                             }
                                             else
                                             {
-                                                print("Data saved successfully!")
                                                 self.instructor = JSON(instructor)
                                                 self.performSegueWithIdentifier("signedUp", sender: nil)
                                             }
