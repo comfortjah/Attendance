@@ -176,7 +176,7 @@ class SignUpVC: UIViewController
      void
      
      - parameters:
-        - uid: The user id that is retrieved upon signing up
+        - uid: The user id string that is retrieved upon signing up
      
      - important:
      If this function does not succeed, the user will have to contact the administrator to delete his or her account and then create a new one.
@@ -213,7 +213,7 @@ class SignUpVC: UIViewController
      void
      
      - parameters:
-        - uid: The user id that is retrieved upon signing up
+        - uid: The user id string that is retrieved upon signing up
      
      - important:
      If this function does not succeed, the user will have to contact the administrator to delete his or her account and then create a new one.
