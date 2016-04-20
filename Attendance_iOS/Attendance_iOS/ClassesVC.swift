@@ -27,7 +27,6 @@ class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBAction func signOutAction(sender: AnyObject)
     {
         self.ref.unauth()
-        //self.dismissViewControllerAnimated(true, completion: nil)
         self.view.window!.rootViewController?.dismissViewControllerAnimated(false, completion: nil)
     }
     
@@ -36,7 +35,6 @@ class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         super.viewDidLoad()
         
         self.ref = Firebase(url: "https://attendance-cuwcs.firebaseio.com")
-        self.instructor = JSON("{}")
         
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }

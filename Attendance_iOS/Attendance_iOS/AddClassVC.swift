@@ -5,6 +5,8 @@
 //  Created by Jake Wert on 4/13/16.
 //  Copyright © 2016 Jake Wert. All rights reserved.
 //
+//  This ViewController allows professors to add classes
+//  to the attendance system
 
 import UIKit
 import Firebase
@@ -24,12 +26,12 @@ class AddClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     @IBOutlet weak var startTimeTextField: UITextField!
     @IBOutlet weak var errorLabel: UILabel!
     
+    var ref: Firebase!
     var instructor: JSON!
     var dayChoices: [String]!
     var dayValues: [Character]!
     var selectedDays: [Bool]!
-    var ref: Firebase!
-    var refClasses: Firebase!
+    
     
     @IBAction func cancelAction(sender: AnyObject)
     {
@@ -41,7 +43,7 @@ class AddClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         if(self.isClassFormValid())
         {
             var days = ""
-            for i in 0...selectedDays.count-1
+            for i in 0...self.selectedDays.count-1
             {
                 if(selectedDays[i].boolValue)
                 {
@@ -49,8 +51,6 @@ class AddClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                 }
             }
             
-            //set value in firebase
-            let classRef = ref.childByAppendingPath("Classes").childByAutoId()
             let newClass =
                 [
                     "CRN":self.crnTextField.text!,
@@ -64,19 +64,70 @@ class AddClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                     "days":days, "startTime":self.startTimeTextField.text!,
                     "endTime":self.endTimeTextField.text!
             ]
-            
-            classRef.setValue(newClass, withCompletionBlock:
-                {
-                    (error:NSError?, ref:Firebase!) in
-                    if (error != nil)
-                    {
-                        self.alert("Unable to create the class.")
-                    }
-                    self.dismissViewControllerAnimated(true, completion: nil)
-            })
+            self.addClass(newClass)
         }
     }
     
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        
+        self.ref = Firebase(url: "https://attendance-cuwcs.firebaseio.com")
+        
+        self.scrollView.contentSize.height = 1050
+        
+        self.dayChoices = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+        self.dayValues = ["M", "T", "W", "R", "F"]
+        self.selectedDays = [false, false, false, false, false]
+        
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+    }
+    
+    /**
+     
+     Adds a new class NSDictionary to Classes object in Firebase
+     
+     - Author:
+     Jake Wert
+     
+     - returns:
+     void
+     
+     - parameters:
+        - newClass: The NSDictionary that is added to the firebase database
+     
+     - version:
+     1.0
+     
+     */
+    func addClass(newClass: NSDictionary)
+    {
+        let classRef = self.ref.childByAppendingPath("Classes").childByAutoId()
+        classRef.setValue(newClass, withCompletionBlock:
+            {
+                (error:NSError?, ref:Firebase!) in
+                if (error != nil)
+                {
+                    self.alert("Unable to create the class.")
+                }
+                self.dismissViewControllerAnimated(true, completion: nil)
+        })
+    }
+    
+    /**
+     
+     Validates the new class form
+     
+     - Author:
+     Mike Litman
+     
+     - returns:
+     Bool
+     
+     - version:
+     1.0
+     
+     */
     func isClassFormValid() -> Bool
     {
         if(self.crnTextField.text?.characters.count == 0)
@@ -116,29 +167,30 @@ class AddClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         return false
     }
     
-    override func viewDidLoad()
+    /**
+     
+     Displays an alert view with a dismiss button and a custom message
+     
+     - Author:
+     Jake Wert
+     
+     - returns:
+     void
+     
+     - parameters:
+     - message: The custom message to be displayed in the alert view
+     
+     - version:
+     1.0
+     
+     */
+    func alert(message:String)
     {
-        super.viewDidLoad()
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
         
-        self.ref = Firebase(url: "https://attendance-cuwcs.firebaseio.com")
-        self.refClasses = ref.childByAppendingPath("Classes")
-    
-        self.scrollView.contentSize.height = 1050
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
         
-        self.dayChoices = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
-        self.dayValues = ["M", "T", "W", "R", "F"]
-        self.selectedDays = [false, false, false, false, false]
-        
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-    }
-    
-    override func didReceiveMemoryWarning()
-    {
-        super.didReceiveMemoryWarning()
-    }
-    
-    override func viewWillAppear(animated: Bool)
-    {
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     //======================================
@@ -146,13 +198,6 @@ class AddClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     //======================================
     
     //These are the delegate functions for a UITableView
-    
-    //This function is fired when editing cells in the UITableView.
-    //It currently only supports deletion.
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
-    {
-        
-    }
     
     //This function exists to determine the number of cells for the UITableView
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -192,81 +237,76 @@ class AddClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     //     Text Field Delegate Functions   |
     //======================================
     
+    //This function is fired when the Return/Done key is selected
     func textFieldShouldReturn(textField: UITextField) -> Bool
     {
         textField.resignFirstResponder()
         return true
     }
     
+    //This function is fired when touching outside of the keyboard
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
     {
         self.view.endEditing(true)
     }
     
+    //This function fires when a textField is selected
     func textFieldDidBeginEditing(textField: UITextField)
     {   
         if(textField === self.startTimeTextField)
         {
-            // Creates the toolbar
-            let toolBar = UIToolbar()
-            toolBar.barStyle = .Default
-            toolBar.translucent = true
-            toolBar.tintColor = self.view.tintColor
-            toolBar.sizeToFit()
-            
-            // Adds the buttons
-            let doneButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(AddClassVC.doneKeyboardAction))
-            let spaceButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
-            let cancelButton = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: #selector(AddClassVC.cancelKeyboardAction))
-            toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-            toolBar.userInteractionEnabled = true
-            
             let datePicker = UIDatePicker()
             datePicker.datePickerMode = UIDatePickerMode.Time
             textField.inputView = datePicker
-            textField.inputAccessoryView = toolBar
+            textField.inputAccessoryView = self.createToolbar()
             datePicker.addTarget(self, action: #selector(AddClassVC.startTimeChanged(_:)), forControlEvents: .ValueChanged)
         }
         else if(textField === self.endTimeTextField)
         {
-            // Creates the toolbar
-            let toolBar = UIToolbar()
-            toolBar.barStyle = .Default
-            toolBar.translucent = true
-            toolBar.tintColor = self.view.tintColor
-            toolBar.sizeToFit()
-            
-            // Adds the buttons
-            let doneButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(AddClassVC.doneKeyboardAction))
-            let spaceButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
-            let cancelButton = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: #selector(AddClassVC.cancelKeyboardAction))
-            toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-            toolBar.userInteractionEnabled = true
-            
             let datePicker = UIDatePicker()
             datePicker.datePickerMode = UIDatePickerMode.Time
             textField.inputView = datePicker
-            textField.inputAccessoryView = toolBar
+            textField.inputAccessoryView = self.createToolbar()
             datePicker.addTarget(self, action: #selector(AddClassVC.endTimeChanged(_:)), forControlEvents: .ValueChanged)
         }
-        else if(textField === self.crnTextField || textField === self.roomNumberTextField || textField === self.courseNumberTextField)
+        else if(textField === self.crnTextField || textField === self.courseNumberTextField)
         {
-            // Creates the toolbar
-            let toolBar = UIToolbar()
-            toolBar.barStyle = .Default
-            toolBar.translucent = true
-            toolBar.tintColor = self.view.tintColor
-            toolBar.sizeToFit()
-            
-            // Adds the buttons
-            let doneButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(AddClassVC.doneKeyboardAction))
-            let spaceButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
-            let cancelButton = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: #selector(AddClassVC.cancelKeyboardAction))
-            toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-            toolBar.userInteractionEnabled = true
-            
-            textField.inputAccessoryView = toolBar
+            textField.inputAccessoryView = self.createToolbar()
         }
+    }
+    
+    /**
+     
+     Displays an alert view with a dismiss button and a custom message
+     
+     - Author:
+     Jake Wert
+     
+     - returns:
+     void
+     
+     - parameters:
+     - message: The custom message to be displayed in the alert view
+     
+     - version:
+     1.0
+     
+     */
+    func createToolbar() -> UIToolbar
+    {
+        let toolbar = UIToolbar()
+        toolbar.barStyle = .Default
+        toolbar.translucent = true
+        toolbar.tintColor = self.view.tintColor
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(AddClassVC.doneKeyboardAction))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: #selector(AddClassVC.cancelKeyboardAction))
+        toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolbar.userInteractionEnabled = true
+        
+        return toolbar
     }
     
     func startTimeChanged(sender: UIDatePicker)
@@ -291,14 +331,5 @@ class AddClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     func cancelKeyboardAction()
     {
         self.view.endEditing(true)
-    }
-    
-    func alert(message:String)
-    {
-        let alertController = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-        
-        self.presentViewController(alertController, animated: true, completion: nil)
     }
 }
