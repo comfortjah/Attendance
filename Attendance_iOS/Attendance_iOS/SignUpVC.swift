@@ -254,7 +254,7 @@ class SignUpVC: UIViewController
      void
      
      - parameters:
-        - message: The custom message to be displayed in the alert view
+     - message: The custom message to be displayed in the alert view
      
      - version:
      1.0

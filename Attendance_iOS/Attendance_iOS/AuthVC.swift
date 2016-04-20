@@ -180,6 +180,7 @@ class AuthVC: UIViewController, UITextFieldDelegate
     //     Text Field Delegate Functions   |
     //======================================
     
+    //Fires when pressing the 'Done' button on the keyboard
     func textFieldShouldReturn(textField: UITextField) -> Bool
     {
         if(textField === self.emailTextField)
@@ -194,6 +195,7 @@ class AuthVC: UIViewController, UITextFieldDelegate
         return true
     }
     
+    //Fires when a touch is made outside the keyboard
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
     {
         self.view.endEditing(true)

@@ -5,6 +5,7 @@
 //  Created by Jake Wert on 4/13/16.
 //  Copyright © 2016 Jake Wert. All rights reserved.
 //
+//  This ViewController manages the professor's classes
 
 
 import UIKit
@@ -17,20 +18,17 @@ class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var instructorLabel: UILabel!
     
+    var ref: Firebase!
     var instructor: JSON!
     var classKey: String!
     var classesJSON: [JSON]!
     var classKeys: [String]!
-    
-    var ref: Firebase!
-    var refClasses: Firebase!
     
     @IBAction func signOutAction(sender: AnyObject)
     {
         self.ref.unauth()
         //self.dismissViewControllerAnimated(true, completion: nil)
         self.view.window!.rootViewController?.dismissViewControllerAnimated(false, completion: nil)
-
     }
     
     override func viewDidLoad()
@@ -38,14 +36,9 @@ class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         super.viewDidLoad()
         
         self.ref = Firebase(url: "https://attendance-cuwcs.firebaseio.com")
-        self.refClasses = ref.childByAppendingPath("Classes")
+        self.instructor = JSON("{}")
         
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-    }
-    
-    override func didReceiveMemoryWarning()
-    {
-        super.didReceiveMemoryWarning()
     }
     
     override func viewWillAppear(animated: Bool)
@@ -53,22 +46,66 @@ class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         self.classesJSON = []
         self.classKeys = []
         
-        self.refClasses.observeSingleEventOfType(.Value, withBlock:
-            { snapshot in
-                let json = JSON(snapshot.value)
-                for (key, value) in json
+        let refClasses = ref.childByAppendingPath("Classes")
+        refClasses.observeSingleEventOfType(.Value, withBlock:
+        { snapshot in
+            let json = JSON(snapshot.value)
+            for (key, value) in json
+            {
+                if(value["instructor"] == self.instructor)
                 {
-                    if(value["instructor"] == self.instructor)
-                    {
-                        self.classKeys.append(key)
-                        self.classesJSON.append(value)
-                    }
+                    self.classKeys.append(key)
+                    self.classesJSON.append(value)
                 }
+            }
                 
-                let instructorText = "Professor \(self.instructor["lastName"])"
-                self.instructorLabel.text = instructorText
-                self.tableView.reloadData()
+            let instructorText = "Professor \(self.instructor["lastName"])"
+            self.instructorLabel.text = instructorText
+            self.tableView.reloadData()
         })
+    }
+    
+    override func prepareForSegue(segue: (UIStoryboardSegue!), sender: AnyObject!)
+    {
+        if (segue.identifier == "toClass")
+        {
+            let destinationVC:ClassVC = segue.destinationViewController as! ClassVC
+            
+            destinationVC.instructor = self.instructor
+            destinationVC.classKey = self.classKey
+        }
+        else if(segue.identifier == "toAddClass")
+        {
+            let destinationVC:AddClassVC = segue.destinationViewController as! AddClassVC
+            
+            destinationVC.instructor = self.instructor
+        }
+    }
+    
+    /**
+     
+     Displays an alert view with a dismiss button and a custom message
+     
+     - Author:
+     Jake Wert
+     
+     - returns:
+     void
+     
+     - parameters:
+     - message: The custom message to be displayed in the alert view
+     
+     - version:
+     1.0
+     
+     */
+    func alert(message:String)
+    {
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     //======================================
@@ -78,7 +115,6 @@ class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     //These are the delegate functions for a UITableView
     
     //This function is fired when editing cells in the UITableView.
-    //It currently only supports deletion.
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
     {
         if editingStyle == .Delete
@@ -126,31 +162,5 @@ class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         self.classKey = self.classKeys[indexPath.row]
         
         self.performSegueWithIdentifier("toClass", sender: nil)
-    }
-    
-     override func prepareForSegue(segue: (UIStoryboardSegue!), sender: AnyObject!)
-     {
-        if (segue.identifier == "toClass")
-        {
-            let destinationVC:ClassVC = segue.destinationViewController as! ClassVC
-     
-            destinationVC.instructor = self.instructor
-            destinationVC.classKey = self.classKey
-        }
-        else if(segue.identifier == "toAddClass")
-        {
-            let destinationVC:AddClassVC = segue.destinationViewController as! AddClassVC
-            
-            destinationVC.instructor = self.instructor
-        }
-     }
-    
-    func alert(message:String)
-    {
-        let alertController = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-        
-        self.presentViewController(alertController, animated: true, completion: nil)
     }
 }
