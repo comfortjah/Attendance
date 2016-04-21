@@ -15,11 +15,10 @@ class AddStudentVC: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
     @IBOutlet weak var studentTableView: UITableView!
     
+    var ref: Firebase!
     var classKey: String!
     var theStudents: [JSON]!
     var theStudentIDS: [String]!
-    
-    var ref: Firebase!
     
     @IBAction func backAction(sender: AnyObject)
     {
@@ -35,33 +34,59 @@ class AddStudentVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         self.studentTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
-    override func didReceiveMemoryWarning()
-    {
-        super.didReceiveMemoryWarning()
-    }
-    
     override func viewWillAppear(animated: Bool)
     {
         self.theStudents = []
         self.theStudentIDS = []
         
+        //We need to generate a list of students to choose
+        self.retrieveAllStudents()
+        
+        self.studentTableView.reloadData()
+    }
+    
+    func retrieveAllStudents()
+    {
         let refStudents = ref.childByAppendingPath("Students")
         
         refStudents.observeSingleEventOfType(.Value, withBlock:
-            { snapshot in
+        { snapshot in
                 
-                let json = JSON(snapshot.value)
+            let json = JSON(snapshot.value)
+            
+            for (key, value) in json
+            {
+                self.theStudentIDS.append(key)
+                self.theStudents.append(value)
+            }
                 
-                for (key, value) in json
-                {
-                    self.theStudentIDS.append(key)
-                    self.theStudents.append(value)
-                }
-                
-                self.studentTableView.reloadData()
+            self.studentTableView.reloadData()
         })
+    }
+    
+    /**
+     
+     Displays an alert view with a dismiss button and a custom message
+     
+     - Author:
+     Jake Wert
+     
+     - returns:
+     void
+     
+     - parameters:
+     - message: The custom message to be displayed in the alert view
+     
+     - version:
+     1.0
+     
+     */
+    func alert(message:String)
+    {
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
         
-        self.studentTableView.reloadData()
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     //======================================
@@ -112,13 +137,5 @@ class AddStudentVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             self.dismissViewControllerAnimated(true, completion: nil)
         })
-    }
-    
-    func alert(message:String)
-    {
-        let alertController = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
-        
-        self.presentViewController(alertController, animated: true, completion: nil)
     }
 }

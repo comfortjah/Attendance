@@ -5,7 +5,8 @@
 //  Created by Jake Wert on 4/13/16.
 //  Copyright © 2016 Jake Wert. All rights reserved.
 //
-//  
+//  This ViewController displays the selected date's 
+//  attendance records
 
 import UIKit
 import Firebase
@@ -17,14 +18,12 @@ class AttendanceVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var attendanceTableView: UITableView!
     @IBOutlet weak var dateLabel: UILabel!
     
+    var ref: Firebase!
     var classKey: String!
     var attendanceDate: String!
-    
     var theRoster: JSON!
     var theStudentIDs: [String]!
     var attendanceRecords: [String]!
-    
-    var ref: Firebase!
     
     @IBAction func backAction(sender: AnyObject)
     {
@@ -42,27 +41,60 @@ class AttendanceVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         self.attendanceTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
-    override func didReceiveMemoryWarning()
-    {
-        super.didReceiveMemoryWarning()
-    }
-    
     override func viewWillAppear(animated: Bool)
     {
         self.theRoster = JSON("{}")
         self.theStudentIDs = []
         self.attendanceRecords = []
         
+        //Retrieve the roster so that we can get the last names via their IDs
+        self.retrieveRoster()
+        self.retrieveAttendance()
+    }
+    
+    /**
+     
+     Retrieves the roster object of the selected class session from Firebase
+     
+     - Author:
+     Jake Wert
+     
+     - returns:
+     void
+     
+     - version:
+     1.0
+     
+     */
+    func retrieveRoster()
+    {
         let refRoster = ref.childByAppendingPath("Classes").childByAppendingPath(self.classKey).childByAppendingPath("Roster")
         
-        let refDate = ref.childByAppendingPath("Classes").childByAppendingPath(self.classKey).childByAppendingPath("Attendance").childByAppendingPath(self.attendanceDate)
-        
         refRoster.observeSingleEventOfType(.Value, withBlock:
-            { snapshot in
-                self.theRoster = JSON(snapshot.value)
+        { snapshot in
+            self.theRoster = JSON(snapshot.value)
                 
-                self.attendanceTableView.reloadData()
-            })
+            self.attendanceTableView.reloadData()
+        })
+    }
+    
+    /**
+     
+     Retrieves the class session's attendance object from Firebase
+     
+     - Author:
+     Jake Wert
+     
+     - returns:
+     void
+     
+     - version:
+     1.0
+     
+     */
+    func retrieveAttendance()
+    {
+        let refDate = ref.childByAppendingPath("Classes").childByAppendingPath(self.classKey).childByAppendingPath("Attendance").childByAppendingPath(self.attendanceDate)
         
         refDate.observeSingleEventOfType(.Value, withBlock:
             { snapshot in
@@ -75,7 +107,7 @@ class AttendanceVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 }
                 
                 self.attendanceTableView.reloadData()
-            })
+        })
     }
     
     //======================================

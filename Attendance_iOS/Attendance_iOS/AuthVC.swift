@@ -105,15 +105,15 @@ class AuthVC: UIViewController, UITextFieldDelegate
     {
         let refInstructors = self.ref.childByAppendingPath("Instructors")
         refInstructors.observeSingleEventOfType(.Value, withBlock:
-            { snapshot in
-                let json = JSON(snapshot.value)
+        { snapshot in
+            let json = JSON(snapshot.value)
+            
+            self.instructor = json[uid]
+            
+            self.emailTextField.text = nil
+            self.passwordTextField.text = nil
                 
-                self.instructor = json[uid]
-                
-                self.emailTextField.text = nil
-                self.passwordTextField.text = nil
-                
-                self.performSegueWithIdentifier("toClasses", sender: nil)
+            self.performSegueWithIdentifier("toClasses", sender: nil)
         })
     }
     
