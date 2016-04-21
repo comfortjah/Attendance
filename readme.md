@@ -1,6 +1,6 @@
 <snippet>
-  <content><![CDATA[
-# ${1:Attendance}
+  <content>
+#Attendance
 As it stands the process for taking attendance at Concordia is an annoyance and inconsistent. It can change year to year and requires professors to take head counts of their students. Most students show up to class on time, but if someone is late to class, they will miss the head count. If the professor didn’t notice a student who was in class, they will be marked absent. The professor has to keep track of these types of occurrences. This traditional method of attendance taking places unnecessary responsibility on the professor.
 
 Rather than headcounts, students should become responsible for themselves. In this proposed solution, the student scans his or her student ID on an RFID reader when they enter the class. The professor will still have to enter the attendance into the CUW Banner system as he or she currently does, but will no longer need to take a head count. Instead the professor can look at his or her phone or a website for attendance records.
@@ -25,6 +25,6 @@ TODO: Write history
 TODO: Write credits
 ## License
 TODO: Write license
-]]></content>
+</content>
   <tabTrigger>readme</tabTrigger>
 </snippet>
