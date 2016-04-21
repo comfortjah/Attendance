@@ -4,19 +4,19 @@ Raspberry Pi/RFID based student attendance system with Web and iOS components.
 
 ## Table of Contents
 
-- [Project Overview](#)
-  - [Problem Definition](#)
-  - [Objectives](#)
-    - [Simply Attendance Taking Process](#)
-    - [Prepare for Banner Inegration](#)
-  - [Justification](#)
-    - [Specific to CUW CS Department](#)
-    - [Impression on Visitors and Prospective Students](#)
-- [Installation](#)
-- [Usage](#)
-- [Contributing](#)
-- [Credits](#)
-- [License](#)
+- [Project Overview](#i-project-overview)
+  - [Problem Definition](#a-problem-definition)
+  - [Objectives](#b-objectives)
+    - [Simplify Attendance Taking Process](#1-simplify-attendance-taking-process)
+    - [Prepare for Banner Inegration](#2-prepare-for-banner-integration)
+  - [Justification](#c-justification)
+    - [Specific to CUW CS Department](#specific-to-cuw-cs-department)
+    - [Impression on Visitors and Prospective Students](#impression-on-visitors-and-prospective-students)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [Credits](#credits)
+- [License](#license)
 
 ## I. Project Overview
 
@@ -37,7 +37,7 @@ This will include designing the solution so that down the road it will lend itse
 
 ### C. Justification
 
-#### 1. Concordia, Computer Science Department Specific
+#### 1. Specific to CUW CS Department
 
 The Computer Science department could surely find an attendance system already created and ready to use. That’s not the only value of this project. There is something about do-it-yourself projects that are appealing. This project is being specifically designed and optimized for Concordia’s Computer Science department.
 
