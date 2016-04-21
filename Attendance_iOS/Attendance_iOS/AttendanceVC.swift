@@ -19,6 +19,10 @@ class AttendanceVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var dateLabel: UILabel!
     
     var ref: Firebase!
+    var refRoster: Firebase!
+    var refDate: Firebase!
+    var handlerRoster: UInt!
+    var handlerDate: UInt!
     var classKey: String!
     var attendanceDate: String!
     var theRoster: JSON!
@@ -36,20 +40,32 @@ class AttendanceVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         self.dateLabel.text = self.attendanceDate
         
-        ref = Firebase(url: "https://attendance-cuwcs.firebaseio.com")
+        self.ref = Firebase(url: "https://attendance-cuwcs.firebaseio.com")
+        self.refRoster = ref.childByAppendingPath("Classes").childByAppendingPath(self.classKey).childByAppendingPath("Roster")
+        self.refDate = ref.childByAppendingPath("Classes").childByAppendingPath(self.classKey).childByAppendingPath("Attendance").childByAppendingPath(self.attendanceDate)
+        
+        self.theStudentIDs = []
+        self.attendanceRecords = []
         
         self.attendanceTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
     override func viewWillAppear(animated: Bool)
     {
+        //TODO Do I need to init here?
         self.theRoster = JSON("{}")
-        self.theStudentIDs = []
-        self.attendanceRecords = []
         
         //Retrieve the roster so that we can get the last names via their IDs
         self.retrieveRoster()
         self.retrieveAttendance()
+    }
+    
+    override func viewDidDisappear(animated: Bool)
+    {
+        super.viewDidDisappear(animated)
+        
+        self.refRoster.removeObserverWithHandle(self.handlerRoster)
+        self.refDate.removeObserverWithHandle(self.handlerDate)
     }
     
     /**
@@ -68,9 +84,8 @@ class AttendanceVC: UIViewController, UITableViewDelegate, UITableViewDataSource
      */
     func retrieveRoster()
     {
-        let refRoster = ref.childByAppendingPath("Classes").childByAppendingPath(self.classKey).childByAppendingPath("Roster")
         
-        refRoster.observeSingleEventOfType(.Value, withBlock:
+        self.handlerRoster = self.refRoster.observeEventType(.Value, withBlock:
         { snapshot in
             self.theRoster = JSON(snapshot.value)
                 
@@ -94,11 +109,12 @@ class AttendanceVC: UIViewController, UITableViewDelegate, UITableViewDataSource
      */
     func retrieveAttendance()
     {
-        let refDate = ref.childByAppendingPath("Classes").childByAppendingPath(self.classKey).childByAppendingPath("Attendance").childByAppendingPath(self.attendanceDate)
-        
-        refDate.observeSingleEventOfType(.Value, withBlock:
+        self.handlerDate = self.refDate.observeEventType(.Value, withBlock:
             { snapshot in
                 let json = JSON(snapshot.value)
+                
+                self.theStudentIDs = []
+                self.attendanceRecords = []
                 
                 for (studentID, time) in json
                 {

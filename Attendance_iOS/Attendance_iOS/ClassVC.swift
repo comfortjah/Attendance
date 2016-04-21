@@ -23,6 +23,8 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var scrollView: UIScrollView!
     
     var ref: Firebase!
+    var refClass: Firebase!
+    var handlerClass: UInt!
     var instructor: JSON!
     var attendanceKeys: [String]!
     var rosterKeys: [String]!
@@ -40,8 +42,13 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         super.viewDidLoad()
         
         self.ref = Firebase(url: "https://attendance-cuwcs.firebaseio.com")
+        self.refClass = ref.childByAppendingPath("Classes").childByAppendingPath(self.classKey)
         
         self.scrollView.contentSize.height = 846
+        
+        self.attendanceKeys = []
+        self.rosterKeys = []
+        self.theRoster = [:]
         
         self.attendanceTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.rosterTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -49,15 +56,14 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     override func viewWillAppear(animated: Bool)
     {
-        self.attendanceKeys = []
-        self.rosterKeys = []
-        self.theRoster = [:]
-        
-        let refClass = ref.childByAppendingPath("Classes").childByAppendingPath(self.classKey)
-        refClass.observeSingleEventOfType(.Value, withBlock:
+        self.handlerClass = self.refClass.observeEventType(.Value, withBlock:
         { snapshot in
                 
             let json = JSON(snapshot.value)
+            
+            self.attendanceKeys = []
+            self.rosterKeys = []
+            self.theRoster = [:]
             
             for (key,_) in json["Attendance"]
             {
@@ -78,6 +84,13 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             self.rosterTableView.reloadData()
         })
+    }
+    
+    override func viewDidDisappear(animated: Bool)
+    {
+        super.viewDidDisappear(animated)
+        
+        self.refClass.removeObserverWithHandle(self.handlerClass)
     }
     
     override func prepareForSegue(segue: (UIStoryboardSegue!), sender: AnyObject!)
@@ -157,9 +170,9 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 else
                 {
                     //When I change from once event to regular listener, firebaes will take care of this
-                    self.rosterKeys.removeAtIndex(indexPath.row)
-                    self.theRoster.removeValueForKey(studentID)
-                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                    //self.rosterKeys.removeAtIndex(indexPath.row)
+                    //self.theRoster.removeValueForKey(studentID)
+                    //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
                 }
             })
         }

@@ -19,10 +19,12 @@ class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var instructorLabel: UILabel!
     
     var ref: Firebase!
+    var refClasses: Firebase!
     var instructor: JSON!
     var classKey: String!
     var classesJSON: [JSON]!
     var classKeys: [String]!
+    var handlerClasses: UInt!
     
     @IBAction func signOutAction(sender: AnyObject)
     {
@@ -35,19 +37,23 @@ class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         super.viewDidLoad()
         
         self.ref = Firebase(url: "https://attendance-cuwcs.firebaseio.com")
+        self.refClasses = ref.childByAppendingPath("Classes")
+        
+        self.classesJSON = []
+        self.classKeys = []
         
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
     override func viewWillAppear(animated: Bool)
     {
-        self.classesJSON = []
-        self.classKeys = []
-        
-        let refClasses = ref.childByAppendingPath("Classes")
-        refClasses.observeSingleEventOfType(.Value, withBlock:
+        self.handlerClasses = self.refClasses.observeEventType(.Value, withBlock:
         { snapshot in
             let json = JSON(snapshot.value)
+            
+            self.classesJSON = []
+            self.classKeys = []
+            
             for (key, value) in json
             {
                 if(value["instructor"] == self.instructor)
@@ -61,6 +67,13 @@ class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             self.instructorLabel.text = instructorText
             self.tableView.reloadData()
         })
+    }
+    
+    override func viewDidDisappear(animated: Bool)
+    {
+        super.viewDidDisappear(animated)
+        
+        self.refClasses.removeObserverWithHandle(self.handlerClasses)
     }
     
     override func prepareForSegue(segue: (UIStoryboardSegue!), sender: AnyObject!)
@@ -128,9 +141,9 @@ class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 else
                 {
                     //When I change from once event to regular listener, firebaes will take care of this
-                    self.classKeys.removeAtIndex(indexPath.row)
-                    self.classesJSON.removeAtIndex(indexPath.row)
-                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                    //self.classKeys.removeAtIndex(indexPath.row)
+                    //self.classesJSON.removeAtIndex(indexPath.row)
+                    //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
                 }
             })
         }

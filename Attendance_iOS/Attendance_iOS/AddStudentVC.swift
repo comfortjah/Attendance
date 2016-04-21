@@ -16,6 +16,8 @@ class AddStudentVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var studentTableView: UITableView!
     
     var ref: Firebase!
+    var refStudents: Firebase!
+    var handlerStudents: UInt!
     var classKey: String!
     var theStudents: [JSON]!
     var theStudentIDS: [String]!
@@ -30,29 +32,38 @@ class AddStudentVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         super.viewDidLoad()
         
         self.ref = Firebase(url: "https://attendance-cuwcs.firebaseio.com")
+        self.refStudents = ref.childByAppendingPath("Students")
+        
+        self.theStudents = []
+        self.theStudentIDS = []
         
         self.studentTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
     override func viewWillAppear(animated: Bool)
     {
-        self.theStudents = []
-        self.theStudentIDS = []
-        
         //We need to generate a list of students to choose
         self.retrieveAllStudents()
         
         self.studentTableView.reloadData()
     }
     
+    override func viewDidDisappear(animated: Bool)
+    {
+        super.viewDidDisappear(animated)
+        
+        self.refStudents.removeObserverWithHandle(self.handlerStudents)
+    }
+    
     func retrieveAllStudents()
     {
-        let refStudents = ref.childByAppendingPath("Students")
-        
-        refStudents.observeSingleEventOfType(.Value, withBlock:
+        self.handlerStudents = self.refStudents.observeEventType(.Value, withBlock:
         { snapshot in
                 
             let json = JSON(snapshot.value)
+            
+            self.theStudents = []
+            self.theStudentIDS = []
             
             for (key, value) in json
             {
