@@ -5,6 +5,7 @@
 //  Created by Jake Wert on 4/13/16.
 //  Copyright © 2016 Jake Wert. All rights reserved.
 //
+//  
 
 import UIKit
 import Firebase
@@ -107,10 +108,5 @@ class AttendanceVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         cell.textLabel?.text = theText
         
         return cell
-    }
-    
-    //This function fire when you select a cell
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
-    {
     }
 }

@@ -5,6 +5,7 @@
 //  Created by Jake Wert on 4/13/16.
 //  Copyright © 2016 Jake Wert. All rights reserved.
 //
+//  This ViewController manages the selected class
 
 import UIKit
 import Firebase
@@ -21,16 +22,13 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var attendanceTableView: UITableView!
     @IBOutlet weak var scrollView: UIScrollView!
     
+    var ref: Firebase!
     var instructor: JSON!
-    
     var attendanceKeys: [String]!
     var rosterKeys: [String]!
     var theRoster: [String:JSON]!
-    
     var classKey: String!
     var attendanceDate: String!
-    
-    var ref: Firebase!
     
     @IBAction func backAction(sender: AnyObject)
     {
@@ -47,11 +45,6 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         self.attendanceTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.rosterTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-    }
-    
-    override func didReceiveMemoryWarning()
-    {
-        super.didReceiveMemoryWarning()
     }
     
     override func viewWillAppear(animated: Bool)
@@ -87,6 +80,48 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         })
     }
     
+    override func prepareForSegue(segue: (UIStoryboardSegue!), sender: AnyObject!)
+    {
+        if (segue.identifier == "toSelectStudent")
+        {
+            let destinationVC:AddStudentVC = segue.destinationViewController as! AddStudentVC
+            
+            destinationVC.classKey = self.classKey
+        }
+        else if (segue.identifier == "toAttendance")
+        {
+            let destinationVC:AttendanceVC = segue.destinationViewController as! AttendanceVC
+            destinationVC.classKey = self.classKey
+            destinationVC.attendanceDate = self.attendanceDate
+        }
+    }
+    
+    /**
+     
+     Displays an alert view with a dismiss button and a custom message
+     
+     - Author:
+     Jake Wert
+     
+     - returns:
+     void
+     
+     - parameters:
+     - message: The custom message to be displayed in the alert view
+     
+     - version:
+     1.0
+     
+     */
+    func alert(message:String)
+    {
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
     //======================================
     //            UI Table View            |
     //======================================
@@ -117,7 +152,7 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 (error:NSError?, ref:Firebase!) in
                 if (error != nil)
                 {
-                    //alert
+                    self.alert("Unable to remove the student.")
                 }
                 else
                 {
@@ -180,19 +215,5 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
     }
     
-    override func prepareForSegue(segue: (UIStoryboardSegue!), sender: AnyObject!)
-    {
-        if (segue.identifier == "toSelectStudent")
-        {
-            let destinationVC:AddStudentVC = segue.destinationViewController as! AddStudentVC
-            
-            destinationVC.classKey = self.classKey
-        }
-        else if (segue.identifier == "toAttendance")
-        {
-            let destinationVC:AttendanceVC = segue.destinationViewController as! AttendanceVC
-            destinationVC.classKey = self.classKey
-            destinationVC.attendanceDate = self.attendanceDate
-        }
-    }
+    
 }
