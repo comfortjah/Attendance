@@ -130,7 +130,7 @@ class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     {
         if editingStyle == .Delete
         {   
-            let refClass = ref.childByAppendingPath("Classes").childByAppendingPath(self.classKey)
+            let refClass = ref.childByAppendingPath("Classes").childByAppendingPath(self.classKeys[indexPath.row])
             
             refClass.removeValueWithCompletionBlock(
             { (error:NSError?, ref:Firebase!) in

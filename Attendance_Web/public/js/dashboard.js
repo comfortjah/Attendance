@@ -96,6 +96,8 @@ function($scope, $firebaseArray, $filter)
 
       //$scope.theClasses.$add(theNewClass);
 
+      refClasses.push(theNewClass);
+
       $scope.addingClass = false;
 
       $scope.CRN = null;

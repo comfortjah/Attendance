@@ -92,7 +92,7 @@
       <div ng-show="addingClass == true">
         <h3>Add a Class</h3>
         <form name="newClassForm" class="new-class">
-          <fieldset class="form-group">
+          <div class="form-group">
             <label for="CRN">CRN:</label>
             <input
               type="number"
@@ -102,9 +102,9 @@
               class="form-control"
               data-toggle="tooltip" data-placement="top" title="The 5-digit CRN number for the class"
               ng-model="CRN" id="CRN">
-          </fieldset>
+          </div>
 
-          <fieldset class="form-group">
+          <div class="form-group">
             <label for="building">Building:</label>
             <input type="text"
               placeholder="Stuenkel"
@@ -112,9 +112,9 @@
               class="form-control"
               data-toggle="tooltip" data-placement="top" title="The building where the class meets"
               ng-model="building" id="building">
-          </fieldset>
+          </div>
 
-          <fieldset class="form-group">
+          <div class="form-group">
             <label for="roomNumber">Room Number:</label>
             <input
               type="text"
@@ -123,9 +123,9 @@
               data-toggle="tooltip" data-placement="top" title="The room number where the class meets"
               class="form-control"
               ng-model="roomNumber" id="roomNumber">
-          </fieldset>
+          </div>
 
-          <fieldset class="form-group">
+          <div class="form-group">
             <label for="courseNumber">Course Number:</label>
             <input
               type="number"
@@ -136,9 +136,9 @@
               data-toggle="tooltip" data-placement="top" title="The number from the course name"
               class="form-control"
               ng-model="courseNumber" id="courseNumber">
-          </fieldset>
+          </div>
 
-          <fieldset class="form-group">
+          <div class="form-group">
             <label for="days">Days:</label>
             <select multiple ng-required="true" class="form-control" ng-model="days" id="days">
               <option value="M">Monday</option>
@@ -147,17 +147,17 @@
               <option value="R">Thursday</option>
               <option value="F">Friday</option>
             </select>
-          </fieldset>
+          </div>
 
-          <fieldset class="form-group">
+          <div class="form-group">
             <label for="startTime">Start Time:</label>
             <input type="time" ng-required="true" class="form-control" ng-model="startTime" id="startTime">
-          </fieldset>
+          </div>
 
-          <fieldset class="form-group">
+          <div class="form-group">
             <label for="endTime">End Time:</label>
             <input type="time" ng-required="true" class="form-control" ng-model="endTime" id="endTime">
-          </fieldset>
+          </div>
 
           <div class="btn-group btn-group-justified">
             <div class="btn-group">
