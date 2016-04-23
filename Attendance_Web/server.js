@@ -48,7 +48,7 @@ apiRouter.route('/attendance')
 
         Object.keys(allClasses).forEach(function(key)
         {
-          theAttendance.push(allClasses[key].Attendance);
+          theAttendance.push({ className:allClasses[key].className, attendance:allClasses[key].Attendance });
         });
 
         res.json(theAttendance);
@@ -73,7 +73,7 @@ apiRouter.route('/attendance/className/:class_name')
         {
           if(allClasses[key].className == req.params.class_name)
           {
-            theAttendance.push(allClasses[key].Attendance);
+            theAttendance.push({ className:allClasses[key].className, attendance:allClasses[key].Attendance });
           }
         });
 
@@ -84,7 +84,60 @@ apiRouter.route('/attendance/className/:class_name')
       });
     });
 
-apiRouter.route('/attendance/instructor/:instructor')
+  apiRouter.route('/attendance/className/:class_name/date/:date')
+      .get(function(req, res)
+      {
+        var theClassesRef = ref.child('Classes');
+        var allClasses;
+        var allClassesKeys = [];
+        var theClass;
+        var attendanceDates;
+        var theAttendance = {};
+
+        theClassesRef.once('value', function (dataSnapshot)
+        {
+          allClasses = dataSnapshot.val();
+          allClassesKeys = Object.keys(allClasses);
+
+          for (var i = 0; i < allClassesKeys.length; i++)
+          {
+            var key = allClassesKeys[i];
+            if(allClasses[key].className == req.params.class_name)
+            {
+              theClass = allClasses[key];
+              break;
+            }
+          }
+
+          try
+          {
+            attendanceDates = Object.keys(theClass.Attendance);
+
+            for (var i = 0; i < attendanceDates.length; i++)
+            {
+              var date = attendanceDates[i];
+              if(date == req.params.date)
+              {
+                theAttendance = theClass.Attendance[date];
+              }
+            }
+          }
+          catch (e)
+          {
+            //There is no attendance, return default value of {}
+          }
+
+
+
+          res.json(theAttendance);
+
+        }, function (err)
+        {
+          res.send(err);
+        });
+      });
+
+apiRouter.route('/attendance/instructor/:first_name/:last_name')
     .get(function(req, res)
     {
       var theClassesRef = ref.child('Classes');
@@ -97,9 +150,9 @@ apiRouter.route('/attendance/instructor/:instructor')
 
         Object.keys(allClasses).forEach(function(key)
         {
-          if(allClasses[key].instructor == req.params.instructor)
+          if( (allClasses[key].instructor.firstName == req.params.first_name) && (allClasses[key].instructor.lastName == req.params.last_name) )
           {
-            theAttendance.push(allClasses[key].Attendance);
+            theAttendance.push({ className:allClasses[key].className, attendance:allClasses[key].Attendance });
           }
         });
 
@@ -110,21 +163,52 @@ apiRouter.route('/attendance/instructor/:instructor')
       });
     });
 
-apiRouter.route('/attendance/className/:class_name/date/:date')
+apiRouter.route('/attendance/student/:first_name/:last_name')
     .get(function(req, res)
     {
-      //TODO once we have dummy attendance data we will write this
-      res.send(req.params.class_name + ' ' + req.params.date);
+      var theClassesRef = ref.child('Classes');
+      var allClasses;
+      var studentClasses = [];
+
+      theClassesRef.once('value', function (dataSnapshot)
+      {
+        allClasses = dataSnapshot.val();
+
+        Object.keys(allClasses).forEach(function(key)
+        {
+          var theClass = allClasses[key];
+          var theRoster = theClass.Roster;
+
+          try
+          {
+            var rosterKeys = Object.keys(theRoster);
+            for (var i = 0; i < rosterKeys.length; i++)
+            {
+              var key = rosterKeys[i];
+              var theStudent = theRoster[key];
+              if( (theStudent.firstName == req.params.first_name) && (theStudent.lastName == req.params.last_name) )
+              {
+                studentClasses.push({ className:theClass.className, attendance:theClass.Attendance });
+                break;
+              }
+            }
+          }
+          catch(err)
+          {
+            //The Class has no roster so we shouldn't even look for a student here
+          }
+
+        });
+
+        res.json(studentClasses);
+
+      }, function (err)
+      {
+        res.send(err);
+      });
     });
 
-apiRouter.route('/attendance/className/:class_name/:firstName/:lastName')
-    .get(function(req, res)
-    {
-      //TODO once we have dummy attendance data we will write this
-      res.send(req.params.firstName + ' ' + req.params.lastName);
-    });
-
-apiRouter.route('/students')
+apiRouter.route('/student')
     .get(function(req, res)
     {
       var theStudentsRef = ref.child('Students');
@@ -152,7 +236,7 @@ apiRouter.route('/roster')
 
         Object.keys(allClasses).forEach(function(key)
         {
-          theRosters.push(allClasses[key].Roster);
+          theRosters.push({ className:allClasses[key].className, roster:allClasses[key].Roster });
         });
 
         res.json(theRosters);

@@ -8,9 +8,9 @@ An API providing read-only access to the data in the Attendance System .
   - [Attendance](#attendance)
     - [GET /api/attendance](#get-apiattendance)
     - [GET /api/attendance/className/:class_name](#get-apiattendanceclassnameclass_name)
-    - [GET /api/attendance/instructor/:instructor](#get-apiattendanceinstructorinstructor)
-    - [GET /api/attendance/:class_name/:date](#get-apiattendanceclass_namedate)
-    - [GET /api/attendance/:first_name/:last_name](#get-apiattendancefirst_namelast_name)
+    - [GET /api/attendance/className/:class_name/date/:date](#get-apiattendanceclassnameclass_namedatedate)
+    - [GET /api/attendance/instructor/:first_name/:last_name](#get-apiattendanceinstructorfirst_namelast_name)
+    - [GET /api/attendance/student/:first_name/:last_name](#get-apiattendancestudentfirst_namelast_name)
   - [Students](#students)
     - [GET /api/students ](#get-apistudents)
   - [Rosters](#rosters)
@@ -44,45 +44,45 @@ http://attendance-cuwcs.herokuapp.com/api/className/CSC518
 
 ---
 
-#### <code>GET</code> /api/attendance/instructor/:instructor
-
-Retrieve all of the attendance records for all classes with the provided instructor
-
-Example:
-
-http://attendance-cuwcs.herokuapp.com/api/instructor/Litman
-
----
-
-#### <code>GET</code> /api/attendance/:class_name/:date
+#### <code>GET</code> /api/attendance/className/:class_name/date/:date
 
 Retrieve the attendance record for the class specified by name and data
 
 Example:
 
-http://attendance-cuwcs.herokuapp.com/api/attendance/CSC518/2-27-16
+http://attendance-cuwcs.herokuapp.com/api/attendance/className/CSC518/date/2-27-16
 
 ---
 
-#### <code>GET</code> /api/attendance/:first_name/:last_name
+#### <code>GET</code> /api/attendance/instructor/:first_name/:last_name
+
+Retrieve all of the attendance records for all classes with the specified instructor (with the provided first name and last name)
+
+Example:
+
+http://attendance-cuwcs.herokuapp.com/api/instructor/firstName/Mike/lastName/Litman
+
+---
+
+#### <code>GET</code> /api/attendance/student/:first_name/:last_name
 
 Retrieve the attendance records for a specified student (with the provided first name and last name)
 
 Example:
 
-http://attendance-cuwcs.herokuapp.com/api/attendance/David/Haxton
+http://attendance-cuwcs.herokuapp.com/api/attendance/student/David/Haxton
 
 ---
 
 ### Students
 
-#### <code>GET</code> /api/students
+#### <code>GET</code> /api/student
 
 Retrieve all the students enrolled in the attendance system
 
 Example:
 
-http://attendance-cuwcs.herokuapp.com/api/students
+http://attendance-cuwcs.herokuapp.com/api/student
 
 ---
 
