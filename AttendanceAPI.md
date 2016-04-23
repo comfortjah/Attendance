@@ -11,7 +11,7 @@ An API providing read-only access to the data in the Attendance System .
     - [GET /api/attendance/className/:class_name/date/:date](#get-apiattendanceclassnameclass_namedatedate)
     - [GET /api/attendance/instructor/:first_name/:last_name](#get-apiattendanceinstructorfirst_namelast_name)
     - [GET /api/attendance/student/:first_name/:last_name](#get-apiattendancestudentfirst_namelast_name)
-  - [Student](#students)
+  - [Student](#student)
     - [GET /api/student ](#get-apistudent)
   - [Roster](#roster)
     - [GET /api/roster](#get-apiroster)
@@ -74,7 +74,7 @@ http://attendance-cuwcs.herokuapp.com/api/attendance/student/David/Haxton
 
 ---
 
-### Students
+### Student
 
 #### <code>GET</code> /api/student
 
@@ -86,7 +86,7 @@ http://attendance-cuwcs.herokuapp.com/api/student
 
 ---
 
-### Rosters
+### Roster
 
 #### <code>GET</code> /api/roster
 
