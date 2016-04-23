@@ -40,7 +40,7 @@ Retrieve the attendance records for the class specified by name
 
 Example:
 
-http://attendance-cuwcs.herokuapp.com/api/className/CSC518
+http://attendance-cuwcs.herokuapp.com/api/attendance/className/CSC518
 
 ---
 
@@ -60,7 +60,7 @@ Retrieve all of the attendance records for all classes with the specified instru
 
 Example:
 
-http://attendance-cuwcs.herokuapp.com/api/instructor/firstName/Mike/lastName/Litman
+http://attendance-cuwcs.herokuapp.com/api/attendance/instructor/firstName/Mike/lastName/Litman
 
 ---
 
