@@ -14,6 +14,7 @@ Raspberry Pi/RFID based student attendance system with Web and iOS components.
     - [Impression on Visitors and Prospective Students](#impression-on-visitors-and-prospective-students)
 - [Installation](#installation)
 - [API](#api)
+- [History](#history)
 - [Credits](#credits)
 - [License](#license)
 
