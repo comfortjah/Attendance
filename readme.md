@@ -51,7 +51,7 @@ TODO: Describe the installation process
 
 The computer science students of Concordia make projects like this one from time to time. Providing them access to the attendance data via an API could definitely spark some creativity.
 
-See the [API Documentation](https://github.com/billiamlumbergh/Attendance/blob/master/AttendanceAPI.md).
+See the [API Documentation](/AttendanceAPI.md).
 
 ## History
 
