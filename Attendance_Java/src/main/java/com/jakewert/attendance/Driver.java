@@ -1,7 +1,21 @@
 package main.java.com.jakewert.attendance;
 
-import com.firebase.client.*;
+import java.util.Date;
+import org.joda.time.DateTime;
+import com.firebase.client.AuthData;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
 
+/**
+* <h1>Driver</h1>
+* The Driver class manages the Java portion of Attendance.
+* <p>
+* TODO Add a more detailed description.
+* 
+*
+* @author  Jake Wert
+* @version 0.1
+*/
 public class Driver
 {
 	public static void main(String[] args)
@@ -17,25 +31,42 @@ public class Driver
 		    @Override
 		    public void onAuthenticationError(FirebaseError firebaseError)
 		    {
-		        // there was an error
 		    	System.out.println("Error");
 		    }
 		});
 		
-		while(true)
-		{
-			
-		}
+		System.out.println(Driver.parseDate("4:30 PM"));
 	}
 	
-	//Given start time and end time, 
-	//loop while it is 15 minutes before class until 15 minutes before end of class
-	//Once loop closes, check schedule (downloaded from firebase) for next class
-	//After all classes restart at 12:00am?
-	
-	//param format -> "00:00 PM" OR "0:00 PM"
-	public static void listenForClassAttendance(String startTime, String endTime)
+	/**
+	   * This method is used to parse a date string of format 'h:mm a'.
+	   * @param time This is the string representation of the time.
+	   * @return Date This returns the parsed date.
+	   */
+	public static Date parseDate(String time)
 	{
+		String[] parsedTime = time.split("\\s+|:\\s*");
 		
+		int hour = Integer.parseInt(parsedTime[0]);
+		int minute = Integer.parseInt(parsedTime[1]);
+		
+		if(parsedTime[2].equals("AM"))
+		{
+			if(hour == 12)
+			{
+				hour -= 12;
+			}
+		}
+		else
+		{
+			if(hour != 12)
+			{
+				hour += 12;
+			}
+		}
+		
+		DateTime dateTime = new DateTime();
+		
+		return dateTime.withTime(hour, minute, 0, 0).toDate();
 	}
 }
