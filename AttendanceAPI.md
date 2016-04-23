@@ -15,7 +15,7 @@ An API providing read-only access to the data in the Attendance System .
     - [GET /api/student ](#get-apistudent)
   - [Roster](#roster)
     - [GET /api/roster](#get-apiroster)
-    - [GET /api/roster/:class_name](#get-apirosterclass_name)
+    - [GET /api/roster/:class_name](#get-apirosterclassnameclass_name)
 - [History](#history)
 - [Credits](#credits)
 - [License](#license)
