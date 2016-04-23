@@ -13,8 +13,7 @@ Raspberry Pi/RFID based student attendance system with Web and iOS components.
     - [Specific to CUW CS Department](#specific-to-cuw-cs-department)
     - [Impression on Visitors and Prospective Students](#impression-on-visitors-and-prospective-students)
 - [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
+- [API](#api)
 - [Credits](#credits)
 - [License](#license)
 
@@ -48,17 +47,11 @@ On top of that, one of the other values of the project is to make an impression 
 
 TODO: Describe the installation process
 
-## Usage
+## API
 
-TODO: Write usage instructions
+The computer science students of Concordia make projects like this one from time to time. Providing them access to the attendance data via an API could definitely spark some creativity.
 
-## Contributing
-
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request :D
+See the [API Documentation](https://github.com/billiamlumbergh/Attendance/blob/master/AttendanceAPI.md).
 
 ## History
 
