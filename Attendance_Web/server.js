@@ -194,6 +194,5 @@ app.use('/api' , apiRouter);
 
 app.use(function(req, res)
 {
-    //res.send(404, 'This is not the page you are looking for.');
-    res.sendFile(__dirname + '/public/404.html');
+  res.sendFile(__dirname + '/public/404.html');
 });
