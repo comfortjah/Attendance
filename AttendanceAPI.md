@@ -60,7 +60,7 @@ Retrieve all of the attendance records for all classes with the specified instru
 
 Example:
 
-http://attendance-cuwcs.herokuapp.com/api/attendance/instructor/firstName/Mike/lastName/Litman
+http://attendance-cuwcs.herokuapp.com/api/attendance/instructor/Mike/Litman
 
 ---
 
@@ -98,13 +98,13 @@ http://attendance-cuwcs.herokuapp.com/api/roster
 
 ---
 
-#### <code>GET</code> /api/roster/:class_name
+#### <code>GET</code> /api/roster/className/:class_name
 
 Retrieve a roster for a class specified by name
 
 Example:
 
-http://attendance-cuwcs.herokuapp.com/api/roster/CSC518
+http://attendance-cuwcs.herokuapp.com/api/roster/className/CSC518
 
 ---
 
