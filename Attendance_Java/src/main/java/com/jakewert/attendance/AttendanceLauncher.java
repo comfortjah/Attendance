@@ -2,18 +2,18 @@ package main.java.com.jakewert.attendance;
 
 /**
 * 
-* <h1>Driver</h1>
+* <h1>AttendanceLauncher</h1>
 * 
 * <p>
 * 
-* Driver class manages the Java portion of Attendance.
+* AttendanceLauncher facilitates the attendance taking process.
 * 
 * <p>
 *
 * @author  Jake Wert
 * @version 0.1
 */
-public class Driver
+public class AttendanceLauncher
 {
 	public static void main(String[] args) throws InterruptedException
 	{	
