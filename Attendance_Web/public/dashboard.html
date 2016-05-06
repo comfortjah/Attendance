@@ -67,7 +67,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="obj in theClasses | filter: { instructor: professor }">
+            <tr ng-repeat="obj in theClasses | filter: { instructor: professor } | orderBy:'className'">
               <td><a href="javascript:void(0)" ng-click="selectClass(obj)"> {{ obj.className }} </a></td>
               <td>{{ obj.days }}</td>
               <td>{{ obj.startTime }}-{{ obj.endTime }}</td>

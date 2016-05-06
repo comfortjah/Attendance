@@ -64,7 +64,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="obj in classes">
+            <tr ng-repeat="obj in classes | orderBy:'className'">
               <td><a href="javascript:void(0)" ng-click="selectClass(obj)"> {{ obj.className }} </a></td>
               <td>{{ obj.instructor.firstName }} {{ obj.instructor.lastName }}</td>
             </tr>
