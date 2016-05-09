@@ -6,18 +6,22 @@ function($scope, $firebaseArray)
   var ref = new Firebase("https://attendance-cuwcs.firebaseio.com/");
   var authData = ref.getAuth();
 
-  $scope.changingPassword = false;
-  $scope.changingEmail = false;
-
   console.log(authData);
 
   if(authData)
   {
+    $scope.logout = function()
+    {
+      ref.unauth();
+      window.location.href = "login.html";
+    };
+
     $scope.changePassword = function()
     {
       if($scope.newPassword == $scope.verificationPassword)
       {
-        ref.changePassword({
+        ref.changePassword(
+          {
             "email":authData.password.email,
             "oldPassword":$scope.oldPassword,
             "newPassword":$scope.newPassword
@@ -40,43 +44,14 @@ function($scope, $firebaseArray)
               else
               {
                 console.log("User password changed successfully!");
+
+                $scope.oldPassword = "";
+                $scope.newPassword = "";
+                $scope.verificationPassword = "";
+
+                $scope.$apply();
               }
             });
-
-            $scope.changeEmail = function()
-            {
-              ref.changeEmail({
-                oldEmail: $scope.oldEmail,
-                newEmail: $scope.newEmail,
-                password: $scope.thePassword
-              }, function(error)
-              {
-                if (error)
-                {
-                  switch (error.code)
-                  {
-                    case "INVALID_PASSWORD":
-                    console.log("The specified user account password is incorrect.");
-                    break;
-                    case "INVALID_USER":
-                    console.log("The specified user account does not exist.");
-                    break;
-                    default:
-                    console.log("Error creating user:", error);
-                  }
-                }
-                else
-                {
-                  console.log("User email changed successfully!");
-                }
-              });
-            };
-
-            $scope.logout = function()
-            {
-              ref.unauth();
-              window.location.href = "login.html";
-            };
       }
       else
       {
