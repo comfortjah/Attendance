@@ -77,14 +77,14 @@
       </div>
     </div>
 
-    <div ng-show="theClassName != null">
+    <div ng-show="classDates != null">
       <h3>{{ theClassName }} Attendance</h3>
-      Date: <select ng-model="selection" ng-options="k for (k,v) in theClassAttendance" ng-change="displayAttendance(selection)" class="form-control">
+      Date: <select ng-model="selection" ng-options="obj.$id for obj in classDates" ng-change="displayAttendance(selection)" class="form-control">
       </select>
       </br>
       </br>
 
-      <table class="table-bordered table-hover" ng-show="selectedDate != null">
+      <table class="table-bordered table-hover" ng-show="theAttendance != null">
         <thead>
           <tr>
             <td>Student ID No.</td>
@@ -92,9 +92,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="(key, value) in selectedDate">
-            <td>{{ key }}</td>
-            <td>{{ value }}</td>
+          <tr ng-repeat="obj in theAttendance | orderBy:'$value'">
+            <td>{{ obj.$id }}</td>
+            <td>{{ obj.$value }}</td>
           </tr>
         </tbody>
       </table>
