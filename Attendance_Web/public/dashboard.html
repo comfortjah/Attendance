@@ -196,7 +196,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="student in theRoster">
+          <tr ng-repeat="student in theRoster | orderBy:'lastName'">
             <td>{{ student.$id }}</td>
             <td>{{ student.firstName }}</td>
             <td>{{ student.lastName }}</td>
