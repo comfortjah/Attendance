@@ -60,12 +60,16 @@
           <thead>
             <tr>
               <td>Class Name</td>
+              <td>Days</td>
+              <td>Time</td>
               <td>Instructor</td>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="obj in classes | orderBy:'className'">
               <td><a href="javascript:void(0)" ng-click="selectClass(obj)"> {{ obj.className }} </a></td>
+              <td>{{ obj.days }}</td>
+              <td>{{ obj.startTime }}-{{ obj.endTime }}</td>
               <td>{{ obj.instructor.firstName }} {{ obj.instructor.lastName }}</td>
             </tr>
           </tbody>
