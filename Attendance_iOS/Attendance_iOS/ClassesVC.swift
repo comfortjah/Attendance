@@ -25,6 +25,7 @@ class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     var classesJSON: [JSON]!
     var classKeys: [String]!
     var handlerClasses: UInt!
+    var count: Int = 0
     
     @IBAction func signOutAction(sender: AnyObject)
     {
@@ -42,18 +43,38 @@ class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         self.classesJSON = []
         self.classKeys = []
         
+        self.instructorLabel.text = "Professor \(self.instructor["lastName"])"
+        
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
     override func viewWillAppear(animated: Bool)
     {
+        //self.handlerClasses = self.refClasses.queryOrderedByChild("className").observeEventType(.Value, withBlock:
+        /*
+        self.handlerClasses = self.refClasses.queryOrderedByChild("className").observeEventType(.ChildChanged, withBlock:
+        { snapshot in
+            let theClass = snapshot.value as! NSDictionary
+            
+            print(theClass)
+            
+            if(JSON(theClass["instructor"]!) == self.instructor)
+            {
+                self.classKeys.append(snapshot.key)
+                self.classesJSON.append(JSON(snapshot.value))
+            }
+            
+            self.tableView.reloadData()
+        })
+        */
+        
         self.handlerClasses = self.refClasses.observeEventType(.Value, withBlock:
         { snapshot in
             let json = JSON(snapshot.value)
-            
+                
             self.classesJSON = []
             self.classKeys = []
-            
+                
             for (key, value) in json
             {
                 if(value["instructor"] == self.instructor)
@@ -72,6 +93,9 @@ class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     override func viewDidDisappear(animated: Bool)
     {
         super.viewDidDisappear(animated)
+        
+        self.classKeys.removeAll()
+        self.classesJSON.removeAll()
         
         self.refClasses.removeObserverWithHandle(self.handlerClasses)
     }

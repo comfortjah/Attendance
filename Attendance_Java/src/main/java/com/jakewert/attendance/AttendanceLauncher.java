@@ -1,5 +1,7 @@
 package main.java.com.jakewert.attendance;
 
+import java.util.HashMap;
+
 /**
 * 
 * <h1>AttendanceLauncher</h1>
@@ -29,7 +31,9 @@ public class AttendanceLauncher
 		authHandler.authenticate(email, password);
 		
 		FirebaseDAO dao = new FirebaseDAO(FIREBASE_URL);
-		System.out.println(dao.retrieveClasses(day, room));
+		HashMap<String, HashMap> theClasses = dao.retrieveClasses(day, room);
+		
+		
 	}
 	
 	
