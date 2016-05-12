@@ -23,7 +23,7 @@ body
 	font-family: 'Open Sans', sans-serif;
 	background: #5F7186;
 }
-.login
+.auth
 {
 	position: absolute;
 	top: 50%;
@@ -32,7 +32,7 @@ body
 	width:300px;
 	height:300px;
 }
-.login h1
+.auth h1
 {
 	color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center;
 }
