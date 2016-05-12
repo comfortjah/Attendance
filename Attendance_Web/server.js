@@ -37,35 +37,66 @@ apiRouter.use(function(req, res, next)
 
 app.post('/signup', function(req, res)
 {
-  ref.createUser(
+  var refApprovedFaculty = ref.child('ApprovedFaculty');
+  refApprovedFaculty.once('value', function (dataSnapshot)
   {
-    email    : req.body.email,
-    password : req.body.password
-  },
-  function(error, userData)
-  {
-    if (error)
-    {
-      var errorDescription;
-      switch (error.code)
-      {
-        case "EMAIL_TAKEN":
-          errorDescription = "The new user account cannot be created because the email is already in use.";
-          break;
-        case "INVALID_EMAIL":
-          errorDescription = "The specified email is not a valid email.";
-          break;
-        default:
-          errorDescription = "Error creating user."
-      }
+    approvedFaculty = dataSnapshot.val();
+    approvedFacultyKeys = Object.keys(approvedFaculty);
 
-      res.status(500);
-      res.send({error:errorDescription});
+    var approved = false;
+
+    for (var i = 0; i < approvedFacultyKeys.length; i++)
+    {
+      var key = approvedFacultyKeys[i];
+
+      var approvedEmail = String(approvedFaculty[key].toLowerCase());
+      var requestEmail = String(req.body.email.toLowerCase())
+
+      if(approvedEmail == requestEmail)
+      {
+        approved = true;
+        break;
+      }
+    }
+
+    if(approved)
+    {
+      ref.createUser(
+      {
+        email    : req.body.email,
+        password : req.body.password
+      },
+      function(error, userData)
+      {
+        if (error)
+        {
+          var errorDescription;
+          switch (error.code)
+          {
+            case "EMAIL_TAKEN":
+              errorDescription = "The new user account cannot be created because the email is already in use.";
+              break;
+            case "INVALID_EMAIL":
+              errorDescription = "The specified email is not a valid email.";
+              break;
+            default:
+              errorDescription = "Error creating user."
+          }
+
+          res.status(500);
+          res.send({error:errorDescription});
+        }
+        else
+        {
+          res.status(200);
+          res.send(userData);
+        }
+      });
     }
     else
     {
-      res.status(200);
-      res.send(userData);
+      res.status(500);
+      res.send({error:'Only approved faculty emails may register.'});
     }
   });
 });
