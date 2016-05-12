@@ -1,7 +1,7 @@
 var signupApp = angular.module("signupApp", ["firebase"]);
 
-signupApp.controller("MyController", ["$scope", "$firebaseAuth",
-function($scope, $firebaseAuth)
+signupApp.controller("MyController", ["$scope", "$firebaseAuth", "$http",
+function($scope, $firebaseAuth, $http)
 {
   var ref = new Firebase("https://attendance-cuwcs.firebaseio.com/");
   var auth = $firebaseAuth(ref);
@@ -11,7 +11,7 @@ function($scope, $firebaseAuth)
     ref.authWithPassword(
       {
         email    : $scope.email,
-        password : $scope.password
+        password : sha256_digest($scope.password)
       },
       function(error, authData)
       {
@@ -50,27 +50,24 @@ function($scope, $firebaseAuth)
         window.location.href = 'dashboard.html';
       }
     });
-  }
+  };
 
   $scope.signup = function()
   {
-    ref.createUser(
+    $http(
     {
-      email    : $scope.email,
-      password : $scope.password
-    },
-    function(error, userData)
+        method: "post",
+        url: "/signup",
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        data: $.param({"email":$scope.email, "password":sha256_digest($scope.password)})
+    })
+    .success(function(response)
     {
-      if (error)
-      {
-        console.log("Error creating user:", error);
-      }
-      else
-      {
-        console.log("Successfully created user account with uid:", userData.uid);
-
-        $scope.login();
-      }
+      $scope.login();
+    })
+    .error(function(response)
+    {
+      alert(response.error)
     });
-  }
+  };
 }]);

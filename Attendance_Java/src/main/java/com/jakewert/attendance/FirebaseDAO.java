@@ -120,15 +120,14 @@ public class FirebaseDAO implements ValueEventListener
     	    
     	    if(theClass.get("room").equals(this.room) && ((String)theClass.get("days")).contains(this.day))
     	    {
-    	    	System.out.println(theClass.get("className"));
-    	    	System.out.println(endTime);
-    	    	System.out.println(endTime.isAfterNow());
+    	    	
     	    	
     	    	//In case of restart mid-day
     	    	//Leaves a 3 minute buffer to be safe
     	    	if(endTime.minusMinutes(23).isAfterNow())
     	    	{
     	    		this.theClasses.put(key, value);
+    	    		System.out.println("Scheduling: " + theClass.get("className") + " (" + theClass.get("startTime") + " to " + endTimeStr + ")");
     	    	}
     	    }
     	}

@@ -24,10 +24,12 @@ import org.joda.time.DateTime;
 public class ClassManager extends Timer
 {
 	private final HashMap<String, HashMap> theClasses;
+	private CardReaderThread crt;
 	
 	public ClassManager(HashMap<String, HashMap> theClasses)
 	{
 		this.theClasses = theClasses;
+		this.crt = new CardReaderThread();
 	}
 	
 	public void scheduleClasses()
@@ -43,7 +45,7 @@ public class ClassManager extends Timer
     	    
     	    //Starts immediately if start time is in the past
     	    //In the case of a restart mid-day, as long as the class
-    	    //has more than 5 minutes left to scan, it will begin
+    	    //has more than 3 minutes left to scan, it will begin
     	    //See FirebaseDAO for more information
     	    this.addClassListener(classKey, startTime, endTime);
 		}
@@ -51,7 +53,7 @@ public class ClassManager extends Timer
 	
 	private void addClassListener(String classKey, String startTime, DateTime endTime)
 	{
-		ClassListener task = new ClassListener(classKey, endTime);
+		ClassListener task = new ClassListener(classKey, endTime, this.crt);
 		this.schedule(task, this.parseDate(startTime).minusMinutes(15).toDate());
 	}
 	

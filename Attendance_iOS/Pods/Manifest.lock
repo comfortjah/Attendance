@@ -1,8 +1,12 @@
 PODS:
+  - Alamofire (3.4.0)
+  - CryptoSwift (0.4.1)
   - Firebase (2.5.1)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
+  - Alamofire (~> 3.4)
+  - CryptoSwift
   - Firebase (>= 2.5.1)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
@@ -16,7 +20,11 @@ CHECKOUT OPTIONS:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
+  Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
+  CryptoSwift: 25b5aff3f260967391f8fff2e9abe4254d2c6fd5
   Firebase: 3565ea88b830f28f2c77ecc524622bc71a20d085
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: d533c9f0b3040f7dc7c8e7d76be071c6476df64b
+
+COCOAPODS: 1.0.0

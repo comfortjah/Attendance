@@ -4,7 +4,6 @@ indexApp.controller("MyController", ["$scope", "$firebaseAuth",
 function($scope, $firebaseAuth)
 {
   var ref = new Firebase("https://attendance-cuwcs.firebaseio.com/");
-  //var auth = $firebaseAuth(ref);
   var authData = ref.getAuth();
 
   if(authData)
@@ -17,7 +16,7 @@ function($scope, $firebaseAuth)
     ref.authWithPassword(
       {
         email    : $scope.username,
-        password : $scope.password
+        password : sha256_digest($scope.password)
       },
       function(error, authData)
       {

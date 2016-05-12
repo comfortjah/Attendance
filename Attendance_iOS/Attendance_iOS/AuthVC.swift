@@ -12,6 +12,8 @@ import UIKit
 import Firebase
 import SystemConfiguration
 import SwiftyJSON
+import CryptoSwift
+import Alamofire
 
 class AuthVC: UIViewController, UITextFieldDelegate
 {
@@ -69,7 +71,7 @@ class AuthVC: UIViewController, UITextFieldDelegate
      */
     func authUser()
     {
-        self.ref.authUser(self.emailTextField.text, password: self.passwordTextField.text, withCompletionBlock:
+        self.ref.authUser(self.emailTextField.text, password: self.passwordTextField.text?.sha256(), withCompletionBlock:
             { error, authData in
                 if error != nil
                 {

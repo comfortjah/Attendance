@@ -12,6 +12,7 @@ import UIKit
 import Firebase
 import SystemConfiguration
 import SwiftyJSON
+import Alamofire
 
 class SignUpVC: UIViewController
 {
@@ -141,28 +142,30 @@ class SignUpVC: UIViewController
      */
     func createUser()
     {
-        self.ref.createUser(self.emailTextField.text, password: self.passwordTextField.text,
-                            withValueCompletionBlock:
-            { error, result in
-                if error != nil
+        
+        let parameters =
+        [
+            "email": self.emailTextField.text!,
+            "password": self.passwordTextField.text!.sha256()
+        ]
+        
+        Alamofire.request(.POST, "http://localhost:5000/signup", parameters: parameters)
+            .responseSwiftyJSON(
+            { (request, response, json, error) in
+                
+                let httpResponse = response! as NSHTTPURLResponse
+                
+                if(httpResponse.statusCode == 200)
                 {
-                    // There was an error creating the account
-                    if(error.code == -9)
-                    {
-                        self.errorLabel.text = "An account already exists with that email."
-                    }
-                    else
-                    {
-                        self.errorLabel.text = "Unable to create your account."
-                    }
+                    let uid = json["uid"].stringValue
+                    self.authUser(uid)
                 }
                 else
                 {
-                    let uid = result["uid"] as! String
-                    
-                    self.authUser(uid)
+                    let error = json["error"].stringValue
+                    self.errorLabel.text = error
                 }
-        })
+            })
     }
     
     /**
@@ -187,7 +190,7 @@ class SignUpVC: UIViewController
      */
     func authUser(uid: String)
     {
-        self.ref.authUser(self.emailTextField.text, password: self.passwordTextField.text,
+        self.ref.authUser(self.emailTextField.text, password: self.passwordTextField.text?.sha256(),
                           withCompletionBlock:
             { error, authData in
                 if error != nil

@@ -797,6 +797,7 @@
                     <connections>
                         <outlet property="attendanceTableView" destination="Jqb-MO-sk1" id="S45-rv-xOP"/>
                         <outlet property="daysLabel" destination="dew-kH-5kg" id="b3K-Bq-VmR"/>
+                        <outlet property="nameLabel" destination="5pJ-6C-ODt" id="xcM-V8-AP9"/>
                         <outlet property="roomLabel" destination="sxI-DQ-KHh" id="hhn-be-98h"/>
                         <outlet property="rosterTableView" destination="2nr-sD-z0U" id="uE3-Sr-Rx3"/>
                         <outlet property="scrollView" destination="Qet-5F-k7Z" id="Tgs-fb-fMi"/>

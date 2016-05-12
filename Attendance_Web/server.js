@@ -35,6 +35,41 @@ apiRouter.use(function(req, res, next)
     next(); // make sure we go to the next routes and don't stop here
 });
 
+app.post('/signup', function(req, res)
+{
+  ref.createUser(
+  {
+    email    : req.body.email,
+    password : req.body.password
+  },
+  function(error, userData)
+  {
+    if (error)
+    {
+      var errorDescription;
+      switch (error.code)
+      {
+        case "EMAIL_TAKEN":
+          errorDescription = "The new user account cannot be created because the email is already in use.";
+          break;
+        case "INVALID_EMAIL":
+          errorDescription = "The specified email is not a valid email.";
+          break;
+        default:
+          errorDescription = "Error creating user."
+      }
+
+      res.status(500);
+      res.send({error:errorDescription});
+    }
+    else
+    {
+      res.status(200);
+      res.send(userData);
+    }
+  });
+});
+
 apiRouter.route('/attendance')
     .get(function(req, res)
     {

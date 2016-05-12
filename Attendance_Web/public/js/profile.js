@@ -23,8 +23,8 @@ function($scope, $firebaseArray)
         ref.changePassword(
           {
             "email":authData.password.email,
-            "oldPassword":$scope.oldPassword,
-            "newPassword":$scope.newPassword
+            "oldPassword":sha256_digest($scope.oldPassword),
+            "newPassword":sha256_digest($scope.newPassword)
           }, function(error)
             {
               if (error)

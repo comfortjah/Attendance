@@ -17,6 +17,7 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var daysLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var roomLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var rosterTableView: UITableView!
     @IBOutlet weak var attendanceTableView: UITableView!
@@ -76,6 +77,7 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 self.rosterKeys.append(key)
             }
             
+            self.nameLabel.text = json["className"].stringValue
             self.daysLabel.text = json["days"].stringValue
             self.timeLabel.text = "\(json["startTime"].stringValue) to \(json["endTime"].stringValue)"
             self.roomLabel.text = json["room"].stringValue

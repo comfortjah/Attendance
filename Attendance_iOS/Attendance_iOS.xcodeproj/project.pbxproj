@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10072ACD8EA604123EB0FF37 /* Pods_Attendance_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04499DCB806A59280AE45128 /* Pods_Attendance_iOS.framework */; };
 		231E147B1CBF13BE007DCD31 /* ClassesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231E147A1CBF13BE007DCD31 /* ClassesVC.swift */; };
+		237FF8321CE45E9D00F9EF43 /* AlamoFireSwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237FF8311CE45E9D00F9EF43 /* AlamoFireSwiftyJSON.swift */; };
 		2385EDB51CBF0B3E00BB597F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2385EDB41CBF0B3E00BB597F /* AppDelegate.swift */; };
 		2385EDBA1CBF0B3E00BB597F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2385EDB81CBF0B3E00BB597F /* Main.storyboard */; };
 		2385EDBC1CBF0B3E00BB597F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2385EDBB1CBF0B3E00BB597F /* Assets.xcassets */; };
@@ -18,11 +20,12 @@
 		239CDC511CC183A6003F7542 /* AddStudentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239CDC501CC183A6003F7542 /* AddStudentVC.swift */; };
 		239CDC531CC2BD96003F7542 /* AttendanceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239CDC521CC2BD96003F7542 /* AttendanceVC.swift */; };
 		239CDC551CC41DFF003F7542 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239CDC541CC41DFF003F7542 /* SignUpVC.swift */; };
-		B8532DC47B8BA461EF2C50E1 /* Pods_Attendance_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAA0C18BBB4F67D0DC12BFB4 /* Pods_Attendance_iOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04499DCB806A59280AE45128 /* Pods_Attendance_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Attendance_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		231E147A1CBF13BE007DCD31 /* ClassesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassesVC.swift; sourceTree = "<group>"; };
+		237FF8311CE45E9D00F9EF43 /* AlamoFireSwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamoFireSwiftyJSON.swift; sourceTree = "<group>"; };
 		2385EDB11CBF0B3E00BB597F /* Attendance_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Attendance_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2385EDB41CBF0B3E00BB597F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2385EDB91CBF0B3E00BB597F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -35,11 +38,8 @@
 		239CDC501CC183A6003F7542 /* AddStudentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStudentVC.swift; sourceTree = "<group>"; };
 		239CDC521CC2BD96003F7542 /* AttendanceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceVC.swift; sourceTree = "<group>"; tabWidth = 3; };
 		239CDC541CC41DFF003F7542 /* SignUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
-		242FBCF76ADF464B5319E711 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		CBAACE0E9A628FB112FC1D54 /* Pods-Attendance_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Attendance_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Attendance_iOS/Pods-Attendance_iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		EAA0C18BBB4F67D0DC12BFB4 /* Pods_Attendance_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Attendance_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		ED9E388F955028F6B81CC101 /* Pods-Attendance_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Attendance_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Attendance_iOS/Pods-Attendance_iOS.release.xcconfig"; sourceTree = "<group>"; };
-		F1D93E95347677A1551BB467 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		6B6A49A4B29773B04BA7A537 /* Pods-Attendance_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Attendance_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Attendance_iOS/Pods-Attendance_iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		E92ADEE4C8B100CE8FB8D98A /* Pods-Attendance_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Attendance_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Attendance_iOS/Pods-Attendance_iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,7 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8532DC47B8BA461EF2C50E1 /* Pods_Attendance_iOS.framework in Frameworks */,
+				10072ACD8EA604123EB0FF37 /* Pods_Attendance_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,8 +59,8 @@
 			children = (
 				2385EDB31CBF0B3E00BB597F /* Attendance_iOS */,
 				2385EDB21CBF0B3E00BB597F /* Products */,
-				F4E6403155D02BDF89B94691 /* Pods */,
-				65E637084786820E58DC4C4F /* Frameworks */,
+				FC948F16132F14B6C22CE0DF /* Pods */,
+				51103A8E647FD751967AE871 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -87,25 +87,24 @@
 				239CDC501CC183A6003F7542 /* AddStudentVC.swift */,
 				2385EDBB1CBF0B3E00BB597F /* Assets.xcassets */,
 				2385EDC01CBF0B3E00BB597F /* Info.plist */,
+				237FF8311CE45E9D00F9EF43 /* AlamoFireSwiftyJSON.swift */,
 			);
 			path = Attendance_iOS;
 			sourceTree = "<group>";
 		};
-		65E637084786820E58DC4C4F /* Frameworks */ = {
+		51103A8E647FD751967AE871 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EAA0C18BBB4F67D0DC12BFB4 /* Pods_Attendance_iOS.framework */,
+				04499DCB806A59280AE45128 /* Pods_Attendance_iOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F4E6403155D02BDF89B94691 /* Pods */ = {
+		FC948F16132F14B6C22CE0DF /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F1D93E95347677A1551BB467 /* Pods.debug.xcconfig */,
-				242FBCF76ADF464B5319E711 /* Pods.release.xcconfig */,
-				CBAACE0E9A628FB112FC1D54 /* Pods-Attendance_iOS.debug.xcconfig */,
-				ED9E388F955028F6B81CC101 /* Pods-Attendance_iOS.release.xcconfig */,
+				6B6A49A4B29773B04BA7A537 /* Pods-Attendance_iOS.debug.xcconfig */,
+				E92ADEE4C8B100CE8FB8D98A /* Pods-Attendance_iOS.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -117,12 +116,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2385EDC31CBF0B3E00BB597F /* Build configuration list for PBXNativeTarget "Attendance_iOS" */;
 			buildPhases = (
-				4387C0AEBA64ADBEFEBEECD0 /* Check Pods Manifest.lock */,
+				D526F77F6D390CA8FCB04DBA /* 📦 Check Pods Manifest.lock */,
 				2385EDAD1CBF0B3E00BB597F /* Sources */,
 				2385EDAE1CBF0B3E00BB597F /* Frameworks */,
 				2385EDAF1CBF0B3E00BB597F /* Resources */,
-				90F5521B53051E8A011016C4 /* Embed Pods Frameworks */,
-				06655C5CFF87F8ED0C27CD01 /* Copy Pods Resources */,
+				60FDC761068FE13C03FC0CD7 /* 📦 Embed Pods Frameworks */,
+				29881444B212DAE76D89C4CD /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -180,14 +179,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		06655C5CFF87F8ED0C27CD01 /* Copy Pods Resources */ = {
+		29881444B212DAE76D89C4CD /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -195,34 +194,34 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Attendance_iOS/Pods-Attendance_iOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4387C0AEBA64ADBEFEBEECD0 /* Check Pods Manifest.lock */ = {
+		60FDC761068FE13C03FC0CD7 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		90F5521B53051E8A011016C4 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Attendance_iOS/Pods-Attendance_iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D526F77F6D390CA8FCB04DBA /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -237,6 +236,7 @@
 				239CDC4F1CBFDFBC003F7542 /* ClassVC.swift in Sources */,
 				239CDC531CC2BD96003F7542 /* AttendanceVC.swift in Sources */,
 				2385EDC71CBF0CA700BB597F /* AuthVC.swift in Sources */,
+				237FF8321CE45E9D00F9EF43 /* AlamoFireSwiftyJSON.swift in Sources */,
 				231E147B1CBF13BE007DCD31 /* ClassesVC.swift in Sources */,
 				239CDC511CC183A6003F7542 /* AddStudentVC.swift in Sources */,
 				2385EDB51CBF0B3E00BB597F /* AppDelegate.swift in Sources */,
@@ -352,7 +352,7 @@
 		};
 		2385EDC41CBF0B3E00BB597F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CBAACE0E9A628FB112FC1D54 /* Pods-Attendance_iOS.debug.xcconfig */;
+			baseConfigurationReference = 6B6A49A4B29773B04BA7A537 /* Pods-Attendance_iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Attendance_iOS/Info.plist;
@@ -364,7 +364,7 @@
 		};
 		2385EDC51CBF0B3E00BB597F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ED9E388F955028F6B81CC101 /* Pods-Attendance_iOS.release.xcconfig */;
+			baseConfigurationReference = E92ADEE4C8B100CE8FB8D98A /* Pods-Attendance_iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Attendance_iOS/Info.plist;
