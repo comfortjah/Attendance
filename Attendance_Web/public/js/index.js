@@ -22,6 +22,7 @@ function($scope, $firebaseArray)
   var authData = ref.getAuth();
 
   $scope.classes = $firebaseArray(refClasses);
+  $scope.theRoster;
 
   //Authentication isn't required for index.html, but it changes the appearance of the Navbar
   //Logout is shown if authenticated. Login and Sign Up are shown if not.
@@ -38,11 +39,12 @@ function($scope, $firebaseArray)
   {
     $scope.theClassName = obj.className;
     $scope.selectedDate = null;
-    $scope.classDates = null;
     $scope.theAttendance = null;
 
-    refClassDates = refClasses.child(obj.$id).child("Attendance");
+    var refClass = refClasses.child(obj.$id);
+    refClassDates = refClass.child("Attendance");
     $scope.classDates = $firebaseArray(refClassDates);
+    $scope.theRoster = $firebaseArray(refClass.child('Roster'));
   };
 
   $scope.displayAttendance = function(dateSelection)

@@ -47,6 +47,7 @@
         <ul class="nav navbar-nav">
           <li class="active"><a href="index.html">Attendance Viewer<span class="sr-only">(current)</span></a></li>
           <li><a href="dashboard.html">Professor Dashboard</a></li>
+          <li><a href="registerStudent.html">Register Student</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="login.html" ng-show="authenticated == false">Login</a></li>
@@ -96,12 +97,16 @@
         <thead>
           <tr>
             <td>Student ID No.</td>
+            <td>First Name</td>
+            <td>Last Name</td>
             <td>Arrival Time</td>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="obj in theAttendance | orderBy:'$value'">
             <td>{{ obj.$id }}</td>
+            <td>{{ theRoster.$getRecord(obj.$id).firstName }}</td>
+            <td>{{ theRoster.$getRecord(obj.$id).lastName }}</td>
             <td>{{ obj.$value }}</td>
           </tr>
         </tbody>
