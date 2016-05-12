@@ -1,11 +1,11 @@
 {
   "name": "Attendance_Web",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
-  "dependencies": {
+  "dependencies":
+  {
     "body-parser": "~1.13.2",
     "express": "~4.13.1",
     "firebase": "~2.4.1",
-    "firebase-token-generator": "^2.0.0"
   }
 }

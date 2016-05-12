@@ -1,10 +1,20 @@
-
+/*
+//  server.js
+//  Attendance_Web
+//
+//  Created by Jake Wert on 5/13/16.
+//  Copyright © 2016 Jake Wert. All rights reserved.
+//
+//  This is the node.js server. It is responsible for
+//  serving the html, css, and js which make up the attendance website,
+//  responding to API requests, and displaying the 404 page if anything
+//  else is requested from the server.
+*/
 
 var express = require('express');
 var bodyParser = require('body-parser');
 var Firebase = require('firebase');
-
-var ref = new Firebase("https://attendance-cuwcs.firebaseio.com/");
+var http = require('http');
 
 var app = express();
 
@@ -13,42 +23,35 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('port', (process.env.PORT || 5000));
 
-var http = require('http').createServer(app).listen(app.get('port'), function()
+http.createServer(app).listen(app.get('port'), function()
 {
     console.log('Server running.');
 });
 
-// Express routing directive.
-// Put all your HTML, CSS, JavaScript, etc. files in '/public'.
-// This works just like a normal webserver, a la Apache.
+//-------------------------------------------------//
+//                  Static Files                   //
+//-------------------------------------------------//
+
 app.use(express.static(__dirname + '/public'));
 
-// API ROUTES
-// ==========================================================
-var apiRouter = express.Router();
+//-------------------------------------------------//
+//                Account Creation                 //
+//-------------------------------------------------//
 
-// Manages all API Requests
-apiRouter.use(function(req, res, next)
-{
-    // do logging
-    console.log('API Request');
-    next(); // make sure we go to the next routes and don't stop here
-});
+var ref = new Firebase("https://attendance-cuwcs.firebaseio.com/");
 
 app.post('/signup', function(req, res)
 {
   var refApprovedFaculty = ref.child('ApprovedFaculty');
   refApprovedFaculty.once('value', function (dataSnapshot)
   {
-    approvedFaculty = dataSnapshot.val();
-    approvedFacultyKeys = Object.keys(approvedFaculty);
-
+    var approvedFaculty = dataSnapshot.val();
+    var approvedFacultyKeys = Object.keys(approvedFaculty);
     var approved = false;
 
     for (var i = 0; i < approvedFacultyKeys.length; i++)
     {
       var key = approvedFacultyKeys[i];
-
       var approvedEmail = String(approvedFaculty[key].toLowerCase());
       var requestEmail = String(req.body.email.toLowerCase())
 
@@ -99,6 +102,22 @@ app.post('/signup', function(req, res)
       res.send({error:'Only approved faculty emails may register.'});
     }
   });
+});
+
+//-------------------------------------------------//
+//                   API Routes                    //
+//-------------------------------------------------//
+
+var apiRouter = express.Router();
+
+// Register the API prefix
+app.use('/api' , apiRouter);
+
+// Manager of all API Requests
+apiRouter.use(function(req, res, next)
+{
+    console.log('API Request');
+    next();
 });
 
 apiRouter.route('/attendance')
@@ -188,12 +207,10 @@ apiRouter.route('/attendance/className/:class_name')
               }
             }
           }
-          catch (e)
+          catch(e)
           {
             //There is no attendance, return default value of {}
           }
-
-
 
           res.json(theAttendance);
 
@@ -223,7 +240,8 @@ apiRouter.route('/attendance/instructor/:first_name/:last_name')
         });
 
         res.json(theAttendance);
-      }, function (err)
+      },
+      function (err)
       {
         res.send(err);
       });
@@ -330,7 +348,6 @@ apiRouter.route('/roster/className/:class_name')
             theRosters.push(allClasses[key].Roster);
           }
         });
-
         res.json(theRosters);
       },
       function (err)
@@ -339,8 +356,9 @@ apiRouter.route('/roster/className/:class_name')
       });
     });
 
-// Register the routes
-app.use('/api' , apiRouter);
+//-------------------------------------------------//
+//                 404 Error Page                  //
+//-------------------------------------------------//
 
 app.use(function(req, res)
 {

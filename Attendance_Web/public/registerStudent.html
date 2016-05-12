@@ -1,5 +1,5 @@
 <!--
-//  profile.html
+//  registerStudent.html
 //  Attendance_Web
 //
 //  Created by Jake Wert on 5/13/16.
@@ -10,17 +10,16 @@
 -->
 
 <!doctype html>
-<html ng-app="profileApp">
+<html ng-app="registerStudentApp">
 <head>
-  <title>Edit Profile</title>
+  <title>Register Student</title>
   <meta charset="UTF-8">
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
   <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
   <script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
   <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
-  <script src="js/profile.js"></script>
-  <script src="js/sha256.js"></script>
+  <script src="js/registerStudent.js"></script>
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -30,7 +29,7 @@
   <link rel="stylesheet" href="css/attendance.css">
 </head>
 
-<body ng-controller="ProfileController">
+<body ng-controller="RegisterStudentController">
 
   <!-- Navbar -->
   <nav class="navbar navbar-default">
@@ -48,35 +47,36 @@
         <ul class="nav navbar-nav">
           <li><a href="index.html">Attendance Viewer<span class="sr-only">(current)</span></a></li>
           <li><a href="dashboard.html">Professor Dashboard</a></li>
+          <li class="active"><a href="registerstduent.html">Register Student</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li class="active"><a href="profile.html">Edit Profile</a></li>
+          <li><a href="profile.html">Edit Profile</a></li>
           <li ng-click="logout()"><a href="login.html">Logout</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- Profile -->
+  <!-- Student Registration -->
   <div class="box-container">
 
     <div>
       <h3>
-        Change Password
+        Register Student
       </h3>
       <div>
-        <form name="newPasswordForm">
+        <form name="newStudentForm">
           <fieldset class="form-group">
-            <label for="oldPassword">Old Password</label>
-            <input type="password" required class="form-control" ng-model="oldPassword" id="oldPassword">
+            <label for="firstName">First Name</label>
+            <input type="text" required class="form-control" ng-model="firstName" id="firstName">
           </fieldset>
           <fieldset class="form-group">
-            <label for="newPassword">New Password</label>
-            <input type="password" required class="form-control" ng-model="newPassword" id="newPassword">
+            <label for="lastName">Last Name</label>
+            <input type="text" required class="form-control" ng-model="lastName" id="lastName">
           </fieldset>
           <fieldset class="form-group">
-            <label for="verificationPassword">Re-type New Password</label>
-            <input type="password" required class="form-control" ng-model="verificationPassword" id="verificationPassword">
+            <label for="studentID">Student ID</label>
+            <input type="text" required class="form-control" ng-model="studentID" id="studentID">
           </fieldset>
 
           <div class="btn-group btn-group-justified">
@@ -85,15 +85,35 @@
                 type="submit"
                 class="btn btn-success"
                 style="outline: none;"
-                ng-click="changePassword()">
+                ng-click="registerStudent()">
                 Submit
               </button>
             </div>
           </div>
-
       </div>
     </div>
 
+    <div>
+      <h3>Registered Students</h3>
+      <div>
+        <table class="table-bordered table-hover">
+          <thead>
+            <tr>
+              <td>Student ID</td>
+              <td>First Name</td>
+              <td>Last Name</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="obj in registeredStudents | orderBy:'lastName'">
+              <td>{{ obj.$id }}</td>
+              <td>{{ obj.firstName }}</td>
+              <td>{{ obj.lastName }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
   </div>
 </body>
