@@ -1,16 +1,26 @@
+<!--
+//  login.html
+//  Attendance_Web
+//
+//  Created by Jake Wert on 5/13/16.
+//  Copyright © 2016 Jake Wert. All rights reserved.
+//
+//  This is the login page. Professors must authenticate here
+//  before they go to dashboard.html
+-->
+
 <!doctype html>
 <html ng-app="indexApp">
 <head>
+  <title>Attendance Login</title>
+  <meta charset="UTF-8">
+
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
   <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
   <script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
   <script src="js/login.js"></script>
   <script src="js/sha256.js"></script>
-
-  <meta charset="UTF-8">
-	<title>Attendance Login</title>
-
-  <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -18,10 +28,10 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="css/login.css">
-
 </head>
 <body>
 
+  <!-- Navbar -->
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -45,6 +55,11 @@
     </div>
   </nav>
 
+  <!-- Login Form -->
+  <!--
+  //   loginForm.$valid verifies that the input of type Email is an actual email address
+  //   and that a password is also included
+  -->
   <div class="login" ng-app="indexApp" ng-controller="MyController">
     <h1>Attendance Management</h1>
     <form name="loginForm">

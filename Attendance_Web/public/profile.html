@@ -1,6 +1,20 @@
+<!--
+//  profile.html
+//  Attendance_Web
+//
+//  Created by Jake Wert on 5/13/16.
+//  Copyright © 2016 Jake Wert. All rights reserved.
+//
+//  This is the edit profile page. At this time professors
+//  may only change their password.
+-->
+
 <!doctype html>
 <html ng-app="profileApp">
 <head>
+  <title>Attendance Home</title>
+  <meta charset="UTF-8">
+
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
   <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
   <script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
@@ -8,17 +22,10 @@
   <script src="js/profile.js"></script>
   <script src="js/sha256.js"></script>
 
-  <meta charset="UTF-8">
-  <title>Attendance Home</title>
-
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
-  <!--
-  <link rel="stylesheet" href="css/normalize.css">
-  !-->
 
   <link rel="stylesheet" href="css/index.css">
 </head>
@@ -73,8 +80,6 @@
           </fieldset>
 
           <div class="btn-group btn-group-justified">
-
-
             <div class="btn-group">
               <button
                 type="submit"
