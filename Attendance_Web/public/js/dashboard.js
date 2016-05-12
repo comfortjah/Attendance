@@ -1,19 +1,32 @@
+/*
+//  dashboard.js
+//  Attendance_Web
+//
+//  Created by Jake Wert on 5/13/16.
+//  Copyright © 2016 Jake Wert. All rights reserved.
+//
+//  This is the javascript for dashboard.html. It is responsible for
+//  adding and removing classes and students.
+*/
+
 var dashboardApp = angular.module("dashboardApp", ["firebase"]);
 
-dashboardApp.controller("MyController", ["$scope", "$firebaseArray", "$filter",
+dashboardApp.controller("DashboardController", ["$scope", "$firebaseArray", "$filter",
 function($scope, $firebaseArray, $filter)
 {
   var ref = new Firebase("https://attendance-cuwcs.firebaseio.com/");
   var refClasses = ref.child("Classes");
-
+  var refAllStudents = ref.child("Students");
+  var refRoster;
+  
   var authData = ref.getAuth();
 
   $scope.addingClass = false;
+  $scope.addingStudent = false;
+  $scope.theRoster;
 
   if (authData)
   {
-    console.log(authData);
-
     var refInstructors = ref.child('Instructors');
     refInstructors.once("value", function(data)
     {
@@ -23,21 +36,14 @@ function($scope, $firebaseArray, $filter)
       {
         if(authData.uid == key)
         {
-          console.log(key + " : " + value);
           $scope.professor = value
         }
       });
     });
 
     $scope.theClasses = $firebaseArray(refClasses);
-    console.log($scope.theClasses);
-    $scope.theRoster;
-
-    var refAllStudents = ref.child("Students");
-
     $scope.allStudents = $firebaseArray(refAllStudents);
 
-    var refRoster;
     $scope.selectClass = function(obj)
     {
       refRoster = refClasses.child(obj.$id).child('Roster');
@@ -45,21 +51,16 @@ function($scope, $firebaseArray, $filter)
       $scope.theClassName = obj.className;
     };
 
-    $scope.addingStudent = false;
-
     $scope.addStudent = function(theStudent)
     {
+      //The default selection returns a value of null
       if(theStudent != null)
       {
         refRoster.child(theStudent.$id).set(
           {
             "firstName":theStudent.firstName,
             "lastName":theStudent.lastName
-          }
-        );
-      }
-      else
-      {
+          });
       }
 
       $scope.studentSelection = "";
@@ -69,9 +70,6 @@ function($scope, $firebaseArray, $filter)
     $scope.removeStudent = function(theStudent)
     {
       theRoster.$remove(theStudent);
-      console.log(theStudent);
-
-      console.log("removing " + theStudent.firstName + " " + theStudent.lastName);
     };
 
     $scope.addClass = function()
@@ -79,7 +77,6 @@ function($scope, $firebaseArray, $filter)
       var days = "";
       angular.forEach($scope.days, function(value, index)
       {
-        //this.push(key + ': ' + value);
         days = days + value;
       });
 
@@ -93,8 +90,6 @@ function($scope, $firebaseArray, $filter)
         "endTime":$filter('date')($scope.endTime, "h:mm a"),
         "instructor":$scope.professor
       };
-
-      //$scope.theClasses.$add(theNewClass);
 
       refClasses.push(theNewClass);
 

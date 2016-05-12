@@ -1,6 +1,17 @@
-var indexApp = angular.module("indexApp", ["firebase"]);
+/*
+//  login.js
+//  Attendance_Web
+//
+//  Created by Jake Wert on 5/13/16.
+//  Copyright © 2016 Jake Wert. All rights reserved.
+//
+//  This is the javascript for login.html. It is responsible for
+//  authenticating the user.
+*/
 
-indexApp.controller("MyController", ["$scope", "$firebaseAuth",
+var loginApp = angular.module("loginApp", ["firebase"]);
+
+loginApp.controller("AuthController", ["$scope", "$firebaseAuth",
 function($scope, $firebaseAuth)
 {
   var ref = new Firebase("https://attendance-cuwcs.firebaseio.com/");
@@ -22,14 +33,12 @@ function($scope, $firebaseAuth)
       {
         if (error)
         {
-          console.log("Login Failed!", error);
+          alert(error);
         }
         else
         {
-          console.log("Authenticated successfully with payload:", authData);
           window.location.href = 'dashboard.html'
         }
       });
-  }
-
+  };
 }]);

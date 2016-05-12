@@ -10,7 +10,7 @@
 -->
 
 <!doctype html>
-<html ng-app="indexApp">
+<html ng-app="loginApp">
 <head>
   <title>Attendance Login</title>
   <meta charset="UTF-8">
@@ -60,7 +60,7 @@
   //   loginForm.$valid verifies that the input of type Email is an actual email address
   //   and that a password is also included
   -->
-  <div class="auth" ng-app="indexApp" ng-controller="MyController">
+  <div class="auth" ng-app="loginApp" ng-controller="AuthController">
     <h1>Attendance</h1>
     <form name="loginForm">
       <input type="email" placeholder="Email" ng-model="username" ng-required="true"><br>

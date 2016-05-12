@@ -1,10 +1,30 @@
+/*
+//  index.js
+//  Attendance_Web
+//
+//  Created by Jake Wert on 5/13/16.
+//  Copyright © 2016 Jake Wert. All rights reserved.
+//
+//  This is the javascript for index.html. It is responsible for
+//  displaying attendance.
+*/
+
 var indexApp = angular.module("indexApp", ["firebase"]);
 
-indexApp.controller("MyController", ["$scope", "$firebaseArray",
+indexApp.controller("AttendanceController", ["$scope", "$firebaseArray",
 function($scope, $firebaseArray)
 {
   var ref = new Firebase("https://attendance-cuwcs.firebaseio.com/");
+  var refClasses = ref.child('Classes');
+  var refClassDates;
+  var refDate;
+
   var authData = ref.getAuth();
+
+  $scope.classes = $firebaseArray(refClasses);
+
+  //Authentication isn't required for index.html, but it changes the appearance of the Navbar
+  //Logout is shown if authenticated. Login and Sign Up are shown if not.
   if(authData)
   {
     $scope.authenticated = true;
@@ -13,12 +33,6 @@ function($scope, $firebaseArray)
   {
     $scope.authenticated = false;
   }
-
-  var refClasses = new Firebase("https://attendance-cuwcs.firebaseio.com/Classes");
-  var refClassDates;
-  var refDate;
-
-  $scope.classes = $firebaseArray(refClasses);
 
   $scope.selectClass = function(obj)
   {
@@ -29,13 +43,13 @@ function($scope, $firebaseArray)
 
     refClassDates = refClasses.child(obj.$id).child("Attendance");
     $scope.classDates = $firebaseArray(refClassDates);
-  }
+  };
 
   $scope.displayAttendance = function(dateSelection)
   {
     refDate = refClassDates.child(dateSelection.$id);
     $scope.theAttendance = $firebaseArray(refDate);
-  }
+  };
 
   $scope.logout = function()
   {

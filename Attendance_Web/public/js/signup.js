@@ -1,10 +1,41 @@
+/*
+//  signup.js
+//  Attendance_Web
+//
+//  Created by Jake Wert on 5/13/16.
+//  Copyright © 2016 Jake Wert. All rights reserved.
+//
+//  This is the javascript for signup.html. It is responsible for
+//  signing a professor up, authenticating them, and creating an
+//  instructor record for them in Firebase.
+*/
+
 var signupApp = angular.module("signupApp", ["firebase"]);
 
-signupApp.controller("MyController", ["$scope", "$firebaseAuth", "$http",
+signupApp.controller("SignUpController", ["$scope", "$firebaseAuth", "$http",
 function($scope, $firebaseAuth, $http)
 {
   var ref = new Firebase("https://attendance-cuwcs.firebaseio.com/");
   var auth = $firebaseAuth(ref);
+
+  $scope.signup = function()
+  {
+    $http(
+    {
+        method: "post",
+        url: "/signup",
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        data: $.param({"email":$scope.email, "password":sha256_digest($scope.password)})
+    })
+    .success(function(response)
+    {
+      $scope.login();
+    })
+    .error(function(response)
+    {
+      alert(response.error)
+    });
+  };
 
   $scope.login = function()
   {
@@ -41,33 +72,12 @@ function($scope, $firebaseAuth, $http)
     {
       if (error)
       {
-        console.log("Unable to create instructor object. Please have the admin remove your account before trying again.");
+        alert("Unable to complete account creation. Please have the admin remove your account before trying again.");
       }
       else
       {
-        console.log("Successfully created instructor object.");
-
         window.location.href = 'dashboard.html';
       }
-    });
-  };
-
-  $scope.signup = function()
-  {
-    $http(
-    {
-        method: "post",
-        url: "/signup",
-        headers: {"Content-Type": "application/x-www-form-urlencoded"},
-        data: $.param({"email":$scope.email, "password":sha256_digest($scope.password)})
-    })
-    .success(function(response)
-    {
-      $scope.login();
-    })
-    .error(function(response)
-    {
-      alert(response.error)
     });
   };
 }]);
