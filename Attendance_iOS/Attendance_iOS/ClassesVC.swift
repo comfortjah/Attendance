@@ -2,7 +2,7 @@
 //  ClassesVC.swift
 //  Attendance_iOS
 //
-//  Created by Jake Wert on 4/13/16.
+//  Created by Jake Wert on 5/13/16.
 //  Copyright © 2016 Jake Wert. All rights reserved.
 //
 //  This ViewController manages the professor's classes
@@ -50,23 +50,9 @@ class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     override func viewWillAppear(animated: Bool)
     {
-        //self.handlerClasses = self.refClasses.queryOrderedByChild("className").observeEventType(.Value, withBlock:
-        /*
-        self.handlerClasses = self.refClasses.queryOrderedByChild("className").observeEventType(.ChildChanged, withBlock:
-        { snapshot in
-            let theClass = snapshot.value as! NSDictionary
-            
-            print(theClass)
-            
-            if(JSON(theClass["instructor"]!) == self.instructor)
-            {
-                self.classKeys.append(snapshot.key)
-                self.classesJSON.append(JSON(snapshot.value))
-            }
-            
-            self.tableView.reloadData()
-        })
-        */
+        //TODO:
+        //Change observer from .Value to .ChildAdded & .ChildRemoved 
+        //so that the classes can be sorted by property "className"
         
         self.handlerClasses = self.refClasses.observeEventType(.Value, withBlock:
         { snapshot in
@@ -161,13 +147,6 @@ class ClassesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 if (error != nil)
                 {
                     self.alert("Unable to delete the class.")
-                }
-                else
-                {
-                    //When I change from once event to regular listener, firebaes will take care of this
-                    //self.classKeys.removeAtIndex(indexPath.row)
-                    //self.classesJSON.removeAtIndex(indexPath.row)
-                    //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
                 }
             })
         }

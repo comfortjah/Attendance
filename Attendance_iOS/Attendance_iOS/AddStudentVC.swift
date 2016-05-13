@@ -2,7 +2,7 @@
 //  AddStudentVC.swift
 //  Attendance_iOS
 //
-//  Created by Jake Wert on 4/13/16.
+//  Created by Jake Wert on 5/13/16.
 //  Copyright © 2016 Jake Wert. All rights reserved.
 //
 
@@ -55,6 +55,20 @@ class AddStudentVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         self.refStudents.removeObserverWithHandle(self.handlerStudents)
     }
     
+    /**
+     
+     Retrieve the object containing all students from Firebase
+     
+     - Author:
+     Jake Wert
+     
+     - returns:
+     void
+     
+     - version:
+     1.0
+     
+     */
     func retrieveAllStudents()
     {
         self.handlerStudents = self.refStudents.observeEventType(.Value, withBlock:

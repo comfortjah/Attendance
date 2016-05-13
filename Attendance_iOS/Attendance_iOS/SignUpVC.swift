@@ -2,7 +2,7 @@
 //  SignUpVC.swift
 //  Attendance_iOS
 //
-//  Created by Jake Wert on 4/13/16.
+//  Created by Jake Wert on 5/13/16.
 //  Copyright © 2016 Jake Wert. All rights reserved.
 //
 //  This class manages the account creation process
@@ -128,7 +128,8 @@ class SignUpVC: UIViewController
     
     /**
      
-     Creates an account for the new user in Firebase
+     Creates an account for the new user in Firebase. The account creation
+     is handled server side so that it is limited to select faculty.
      
      - Author:
      Jake Wert

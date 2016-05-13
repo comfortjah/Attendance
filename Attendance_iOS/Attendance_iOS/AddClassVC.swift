@@ -2,7 +2,7 @@
 //  AddClass.swift
 //  Attendance_iOS
 //
-//  Created by Jake Wert on 4/13/16.
+//  Created by Jake Wert on 5/13/16.
 //  Copyright © 2016 Jake Wert. All rights reserved.
 //
 //  This ViewController allows professors to add classes
@@ -31,7 +31,6 @@ class AddClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     var dayChoices: [String]!
     var dayValues: [Character]!
     var selectedDays: [Bool]!
-    
     
     @IBAction func cancelAction(sender: AnyObject)
     {
@@ -178,7 +177,7 @@ class AddClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
      void
      
      - parameters:
-     - message: The custom message to be displayed in the alert view
+        - message: The custom message to be displayed in the alert view
      
      - version:
      1.0
@@ -277,17 +276,15 @@ class AddClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     /**
      
-     Displays an alert view with a dismiss button and a custom message
+     Creates a toolbar with Done and Cancel buttons so users can exit the
+     DatePicker
      
      - Author:
      Jake Wert
      
      - returns:
-     void
-     
-     - parameters:
-     - message: The custom message to be displayed in the alert view
-     
+     UIToolbar
+
      - version:
      1.0
      

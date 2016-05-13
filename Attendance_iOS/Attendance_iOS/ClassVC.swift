@@ -2,7 +2,7 @@
 //  ClassVC.swift
 //  Attendance_iOS
 //
-//  Created by Jake Wert on 4/13/16.
+//  Created by Jake Wert on 5/13/16.
 //  Copyright © 2016 Jake Wert. All rights reserved.
 //
 //  This ViewController manages the selected class
@@ -83,7 +83,6 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             self.roomLabel.text = json["room"].stringValue
             
             self.attendanceTableView.reloadData()
-            
             self.rosterTableView.reloadData()
         })
     }
@@ -122,7 +121,7 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
      void
      
      - parameters:
-     - message: The custom message to be displayed in the alert view
+        - message: The custom message to be displayed in the alert view
      
      - version:
      1.0
@@ -168,13 +167,6 @@ class ClassVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 if (error != nil)
                 {
                     self.alert("Unable to remove the student.")
-                }
-                else
-                {
-                    //When I change from once event to regular listener, firebaes will take care of this
-                    //self.rosterKeys.removeAtIndex(indexPath.row)
-                    //self.theRoster.removeValueForKey(studentID)
-                    //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
                 }
             })
         }

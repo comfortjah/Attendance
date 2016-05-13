@@ -2,7 +2,7 @@
 //  AttendanceVC.swift
 //  Attendance_iOS
 //
-//  Created by Jake Wert on 4/13/16.
+//  Created by Jake Wert on 5/13/16.
 //  Copyright © 2016 Jake Wert. All rights reserved.
 //
 //  This ViewController displays the selected date's 
@@ -52,7 +52,6 @@ class AttendanceVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     override func viewWillAppear(animated: Bool)
     {
-        //TODO Do I need to init here?
         self.theRoster = JSON("{}")
         
         //Retrieve the roster so that we can get the last names via their IDs
@@ -70,7 +69,7 @@ class AttendanceVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     /**
      
-     Retrieves the roster object of the selected class session from Firebase
+     Retrieves the roster object of the selected class from Firebase
      
      - Author:
      Jake Wert
