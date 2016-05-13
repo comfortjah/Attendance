@@ -2,19 +2,28 @@ package main.java.com.jakewert.attendance;
 
 import java.util.Scanner;
 
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-
+/**
+* <h1>CardReaderThread</h1>
+* 
+* <p>
+* 
+* CardReaderThread manages the the input from the card reader
+* and communicates with its instance of FirebaseDAO to create
+* attendance records.
+* 
+* <p>
+* 
+* @author  Jake Wert
+* @version 1.0
+*/
 public class CardReaderThread extends Thread
-{
-	//Have setters for class settings
-	//have class listeners set the class information
-	//listen for input all day
-	//when input is received, send it to the class setting
-	
+{	
+	/*	The key used to identify a given class in the Firebase database
+	 * 	"" (empty String) indicates there is currently no class
+	 */
 	private String classKey;
 	private Scanner input;
+	private FirebaseDAO dao;
 	
 	public CardReaderThread()
 	{
@@ -22,6 +31,14 @@ public class CardReaderThread extends Thread
 		this.classKey = "";
 	}
 	
+	/**
+	   * This method is used to set the current class
+	   * 
+	   * @param classKey This is the String representation of the key
+	   * used to identify a given class in the Firebase database
+	   * (e.g. "-KHOKLhMCwo_giyOi8iQ").
+	   * 
+	   */
 	public void setClass(String classKey)
 	{
 		if(!this.isAlive())
@@ -31,14 +48,25 @@ public class CardReaderThread extends Thread
 		}
 		else
 		{
-			System.out.println("\r\nFinished taking attendance for " + this.classKey);
 			this.classKey = classKey;
 			System.out.print(this.classKey + "~ Student ID Card: ");
 		}
 	}
 	
-	public void start()
+	/**
+	   * This method is used to set the class to an empty String,
+	   * effectively signaling this Thread that the previous class's
+	   * attendance has been taken.
+	   */
+	public void setClass()
 	{
+		System.out.println("\r\nFinished taking attendance for " + this.classKey);
+		this.classKey = "";
+	}
+	
+	public void run()
+	{
+		this.dao = new FirebaseDAO("https://attendance-cuwcs.firebaseio.com");
 		while (true)
 		{
 			System.out.print(this.classKey + "~ Student ID Card: ");
@@ -51,18 +79,9 @@ public class CardReaderThread extends Thread
 			{
 				e.printStackTrace();
 			}
-			if(!studentID.equals(""))
-			{
-				DateTime dateTime = new DateTime();
-				
-				DateTimeFormatter dateFormat = DateTimeFormat.forPattern("M-d-yy");
-				DateTimeFormatter timeFormat = DateTimeFormat.forPattern("h:mm a");
-				
-				String date = dateTime.toString(dateFormat);
-				String time = dateTime.toString(timeFormat);
-				
-				FirebaseDAO dao = new FirebaseDAO("https://attendance-cuwcs.firebaseio.com");
-				dao.addAttendanceRecord(this.classKey, date, studentID, time);
+			if(!studentID.equals("") && !this.classKey.equals(""))
+			{	
+				this.dao.addAttendanceRecord(this.classKey, Dates.dateToday(), studentID, Dates.timeNow());
 			}
 		}
 	}

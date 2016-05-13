@@ -1,12 +1,7 @@
 package main.java.com.jakewert.attendance;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map.Entry;
-
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -27,12 +22,18 @@ import com.firebase.client.ValueEventListener;
 * <p>
 * 
 * @author  Jake Wert
-* @version 0.1
+* @version 1.0
 */
 public class FirebaseDAO implements ValueEventListener
 {
 	private Firebase ref;
+	
+	//This is a HashMap<String, HashMap> (similar structure to JSON)
+	//which contains the classes that the FirebaseDAO has retrieved.
 	private HashMap<String, HashMap> theClasses;
+	
+	//isDone is used to block access to theClasses 
+	//until they are retrieved from Firebase
 	private boolean isDone;
 	
 	private String room;
@@ -74,6 +75,25 @@ public class FirebaseDAO implements ValueEventListener
 		return this.theClasses;
 	}
 	
+	/**
+	   * addAttendanceRecord creates a new attendance record for the class
+	   * corresponding to <i>classKey</i>, for the day <i>date</i> at the
+	   * time <i>time</i>.
+	   * 
+	   * @param classKey This is the String representation ("-KHOKLhMCwo_giyOi8iQ")
+	   * of the key used to identify a given class in the Firebase database.
+	   *  
+	   * @param date This is the String representation (e.g. "5-13-16")
+	   * of the date on which the student signed into class.
+	   * 
+	   * @param studentID This is the String representation (e.g. "05984231")
+	   * of the 8 digit number stored on a student ID.
+	   * 
+	   * @param time This is the String representation (e.g. "2:35 PM")
+	   * of the time a student signed into class.
+	   * 
+	   * @return HashMap<String, HashMap This returns a HashMap of the filtered classes.
+	   */
 	public void addAttendanceRecord(String classKey, String date, String studentID, String time)
 	{
 		Firebase attendanceRecord = this.ref.child("Classes").child(classKey).child("Attendance").child(date).child(studentID);
@@ -104,9 +124,9 @@ public class FirebaseDAO implements ValueEventListener
 
 	@Override
 	public void onDataChange(DataSnapshot snapshot)
-	{
-		DateTimeFormatter formatter = DateTimeFormat.forPattern("hh:mm a");
+	{	
 		HashMap<String, HashMap> data = (HashMap<String, HashMap>) snapshot.getValue();
+		
     	for(Entry<String, HashMap> entry : data.entrySet())
     	{
     		String key = entry.getKey();
@@ -114,52 +134,19 @@ public class FirebaseDAO implements ValueEventListener
     		
     	    HashMap<String, Object> theClass = data.get(key);
     	    
-    	    String endTimeStr = (String)theClass.get("endTime");
-    	    
-    	    DateTime endTime = this.parseDate(endTimeStr);
+    	    String endTime = (String)theClass.get("endTime");
     	    
     	    if(theClass.get("room").equals(this.room) && ((String)theClass.get("days")).contains(this.day))
     	    {
-    	    	
-    	    	
     	    	//In case of restart mid-day
-    	    	//Leaves a 3 minute buffer to be safe
-    	    	if(endTime.minusMinutes(23).isAfterNow())
+    	    	if(Dates.classHasEnded(endTime))
     	    	{
     	    		this.theClasses.put(key, value);
-    	    		System.out.println("Scheduling: " + theClass.get("className") + " (" + theClass.get("startTime") + " to " + endTimeStr + ")");
+    	    		System.out.println("Scheduling: " + theClass.get("className") + " (" + theClass.get("startTime") + " to " + endTime + ")");
     	    	}
     	    }
     	}
     	
     	this.isDone = true;
 	}
-	
-	private DateTime parseDate(String time)
-	{
-		String[] parsedTime = time.split("\\s+|:\\s*");
-		
-		int hour = Integer.parseInt(parsedTime[0]);
-		int minute = Integer.parseInt(parsedTime[1]);
-		
-		if(parsedTime[2].equals("AM"))
-		{
-			if(hour == 12)
-			{
-				hour -= 12;
-			}
-		}
-		else
-		{
-			if(hour != 12)
-			{
-				hour += 12;
-			}
-		}
-		
-		DateTime dateTime = new DateTime();
-		
-		return dateTime.withTime(hour, minute, 0, 0);
-	}
-
 }

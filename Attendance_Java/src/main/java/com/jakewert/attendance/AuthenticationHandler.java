@@ -15,11 +15,14 @@ import com.firebase.client.FirebaseError;
 * <p>
 * 
 * @author  Jake Wert
-* @version 0.1
+* @version 1.0
 */
 public class AuthenticationHandler implements AuthResultHandler
 {
 	private Firebase ref;
+	
+	//isDone is used to block further action until authenticated
+	//with Firebase. Without authentication, the database is read-only.
 	private boolean isDone;
 	
 	public AuthenticationHandler(String firebaseURL)
@@ -31,8 +34,7 @@ public class AuthenticationHandler implements AuthResultHandler
 	/**
 	   * authenticate makes an asynchronous call to authenticate with Firebase.
 	   * 
-	   * @param email This is the String representation 
-	   * (e.g. "email@email.com")
+	   * @param email This is the String representation (e.g. "email@email.com")
 	   * of the administrator's email account with Firebase.
 	   *  
 	   * @param password This is the String representation

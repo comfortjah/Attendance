@@ -21,11 +21,11 @@ public class AttendanceLauncher
 	{	
 		final String FIREBASE_URL = "https://attendance-cuwcs.firebaseio.com";
 		
-		final String email = "email@email.com";
+		final String email = "attendance.cuwcs@gmail.com";
 		final String password = "********";
 		
-		final String day = "M";
-		final String room = "Stuenkel 120B";
+		final String day = Dates.dayToday();
+		final String room = "Stuenkel 120";
 		
 		AuthenticationHandler authHandler = new AuthenticationHandler(FIREBASE_URL);
 		authHandler.authenticate(email, password);
@@ -33,10 +33,7 @@ public class AttendanceLauncher
 		FirebaseDAO dao = new FirebaseDAO(FIREBASE_URL);
 		HashMap<String, HashMap> theClasses = dao.retrieveClasses(day, room);
 		
-		
+		ClassManager classManager = new ClassManager(theClasses);
+		classManager.scheduleClasses();
 	}
-	
-	
-	
-	
 }
