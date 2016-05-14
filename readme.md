@@ -16,7 +16,6 @@ Raspberry Pi/RFID based student attendance system with Web and iOS components.
 - [API](#api)
 - [History](#history)
 - [Credits](#credits)
-- [License](#license)
 
 ## Project Overview
 
@@ -46,7 +45,73 @@ On top of that, one of the other values of the project is to make an impression 
 
 ## Installation
 
-TODO: Describe the installation process
+Download the package above and follow the instructions for each component below.
+
+### iOS Client
+
+The Attendance_iOS folder is an Xcode project utilizing Cocoapods. You will need to open *Attendance_iOS.xcworkspace*, **NOT** *Attendance_iOS.xcproj*, otherwise the installed libraries (pods) will not be usable.
+
+If it is your first time running the project, there is a chance a Cocoapods bug will be unable to import the libraries without a successful build first. If Xcode indicates it cannot find or load a module, do your best to comment out all references to that library and run/build the project before uncommenting them.
+
+If you can successfully build the project, it can be installed to any iOS device plugged into the Mac with this project (as long as they allow apps from the developer account in their phone settings).
+
+This app will also work on iPads, but is visually designed with the iPhone in mind.
+
+### Web Client & Server
+
+I've successfully hosted this server on heroku, but I'm sure it is possible to do so with another hosting service that supports Node.js. Hopefully [this guide](https://devcenter.heroku.com/articles/deploying-nodejs "Deploying Node.js Apps on Heroku") will assist you. Otherwise this project, in its state as of 5/13/16 will be hosted at http://attendance-cuwcs.herokuapp.com.
+
+All pages are in the *public* folder. Their respective javascript and css files are in *public/js* and *public/css*. The Node.js server will only serve pages and files that abide by the current folder structure, unless you alter the Node.js server.
+
+*package.json* contains the Node.js modules heroku will need to install when running the server. The *node_modules* folder is only used for local hosting. The Procfile informs heroku that the Node.js server is *server.js*.
+
+### Raspberry Pi
+
+The Raspberry Pi has a scheduled reboot at 12:00 AM every day and runs *AttendanceLauncher.sh*, a shell script, on start up. Everything needed for the Raspberry Pi is in its respective folder. The *Attendance_Java* folder is the source code for *attendance.jar* an exported runnable jar file created with Eclipse.
+
+Few (if any) changes would need to be made to the source code; however, if any are made, be sure to configure the build path to include the external .jar files in *Attendance_Java/libs*. *joda-time-2.93-javadoc.jar* and *joda-time-2.93-sources.jar* are not libraries, but the source and javadoc for joda-time-2.9.3. You may optionally add them to the joda-time library you configure in the build path. If you would also like the Firebase javadoc, you will need to enter https://www.firebase.com/docs/java-api/javadoc/.
+
+## Dependencies
+
+### Swift
+
+- [*AlamoFire*](https://github.com/Alamofire/Alamofire)
+
+- [*AlamoFireSwiftyJSON*](https://github.com/SwiftyJSON/Alamofire-SwiftyJSON)
+
+- [*CryptoSwift*](https://github.com/krzyzanowskim/CryptoSwift)
+
+- [*Firebase*](https://www.firebase.com/docs/ios/quickstart.html)
+
+- [*SwiftyJSON*](https://github.com/SwiftyJSON/SwiftyJSON)
+
+### Java
+
+- [*Firebase*](https://cdn.firebase.com/java/firebase-client-jvm-2.5.2.jar)
+
+- [*joda-time*](https://github.com/JodaOrg/joda-time/releases)
+
+### AngularJS
+
+- [*Sha256.js*](http://www.bichlmeier.info/sha256.js)
+
+### Node.js
+
+- [*body-parser*](https://www.npmjs.com/package/body-parser)
+
+- [*express*](https://www.npmjs.com/package/express)
+
+- [*firebase*](https://www.npmjs.com/package/firebase)
+
+NOTE: Include these in *package.json* as in the above source code. If you want to run the Node.js server locally, run
+
+```bash
+npm install
+```
+
+in the directory with your terminal or command prompt. This will install all of the dependencies in node_modules.
+
+You may also download them manually.
 
 ## API
 
@@ -56,12 +121,10 @@ See the [API Documentation](/AttendanceAPI.md).
 
 ## History
 
-TODO: Write history
+| Version  | Date    | Activity                                            |
+|:--------:|:-------:|:---------------------------------------------------:|
+| 1.0      | 5/13/16 | Jake Wert released v1.0 of Attendance to Dr. Litman |
 
 ## Credits
 
-TODO: Write credits
-
-## License
-
-TODO: Write license
+Thank you to the Computer Science department at Concordia University Wisconsin for the opportunity to create something useful and for the knowledge to do so as well.

@@ -22,7 +22,7 @@ public class AttendanceLauncher
 		final String FIREBASE_URL = "https://attendance-cuwcs.firebaseio.com";
 		
 		final String email = "attendance.cuwcs@gmail.com";
-		final String password = "********";
+		final String password = "gasoline952439";
 		
 		final String day = Dates.dayToday();
 		final String room = "Stuenkel 120";
