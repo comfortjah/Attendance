@@ -21,7 +21,9 @@ Raspberry Pi/RFID based student attendance system with Web and iOS components.
   - [Java](#java)
   - [AngularJS](#angularjs)
   - [Node.js](#nodejs)
+- [Usage](#usage)
 - [API](#api)
+- [Future Work](#future-work)
 - [History](#history)
 - [Credits](#credits)
 
@@ -121,11 +123,33 @@ in the directory with your terminal or command prompt. This will install all of 
 
 You may also download them manually.
 
+## Usage
+
+See the [Attendance Documentation](/AttendanceDoc.md).
+
 ## API
 
 The computer science students of Concordia make projects like this one from time to time. Providing them access to the attendance data via an API could definitely spark some creativity.
 
 See the [API Documentation](/AttendanceAPI.md).
+
+## Future Work
+
+### Report Generation
+
+The faculty of the Computer Science department at Concordia have spoken and would greatly benefit from a report generation from these attendance records. I'm not sure how I would solve this problem quite yet, but it is definitely something that will complement the current system.
+
+### Push Notifications
+
+Push Notifications could pop up on the iOS devices when class is over almost as a reminder to the professor to enter the attendance. Not only that, but the push notification could open up to a view of the attendance, maximizing the convenience of the current process.
+
+### Alerts
+
+Alerts could be sent to the professor or student via email. Maybe a student has missed 5 classes in a row, which triggers an alert. It could email the student and professor notifying them of this pattern, helping facilitate better communication between professor and students as well as better class attendance.
+
+### Additional Polishing
+
+The iOS app and Node.js server could use some polishing perhaps. See the repository's [issues](/../../issues/) for additional information.
 
 ## History
 
