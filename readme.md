@@ -77,7 +77,30 @@ All pages are in the *public* folder. Their respective javascript and css files 
 
 ### Raspberry Pi
 
-The Raspberry Pi has a scheduled reboot at 12:00 AM every day and runs *AttendanceLauncher.sh*, a shell script, on start up. Everything needed for the Raspberry Pi is in its respective folder. The *Attendance_Java* folder is the source code for *attendance.jar* an exported runnable jar file created with Eclipse.
+The Raspberry Pi has a scheduled reboot at 12:00 AM every day and runs *AttendanceLauncher.sh*, a shell script, on start up. This shell script is kept in the *RaspberryPi* folder. To setup the two jobs that need to run I used `crontab`:
+
+```bash
+crontab -e
+```
+
+Append the absolute path of the shell script to the crontab file:
+
+```bash
+@reboot /home/pi/Desktop/Attendance/AttendanceLauncher.sh
+```
+This will run the shell script each time the Raspberry Pi has been rebooted.
+
+To set up the midnight reboot similarly create another crontab job with sudo:
+
+```bash
+0 0 * * * /sbin/reboot
+```
+
+The pattern before the command/script is:
+
+Minute Hour DayofMonth Month DayofWeek
+
+The *Attendance_Java* folder is the source code for *attendance.jar* an exported runnable jar file created with Eclipse.
 
 Few (if any) changes would need to be made to the source code; however, if any are made, be sure to configure the build path to include the external .jar files in *Attendance_Java/libs*. *joda-time-2.93-javadoc.jar* and *joda-time-2.93-sources.jar* are not libraries, but the source and javadoc for joda-time-2.9.3. You may optionally add them to the joda-time library you configure in the build path. If you would also like the Firebase javadoc, you will need to enter https://www.firebase.com/docs/java-api/javadoc/.
 
